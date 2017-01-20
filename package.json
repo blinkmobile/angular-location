@@ -9,6 +9,7 @@
   "dependencies": {},
   "devDependencies": {
     "angular": "^1.6.1",
+    "angular-mocks": "1.6.1",
     "eslint": "^3.13.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-node": "^3.0.5",
@@ -16,16 +17,27 @@
     "eslint-plugin-standard": "^2.0.1",
     "fixpack": "^2.3.1",
     "flow-bin": "^0.38.0",
+    "jest": "^18.1.0",
     "webpack": "^2.2.0"
   },
   "directories": {
-    "test": "test"
+    "example": "examples",
+    "test": "__tests__"
   },
   "engines": {
     "node": ">=7",
     "npm": ">=4"
   },
   "homepage": "https://github.com/blinkmobile/angular-location.js#readme",
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "lines": 90
+      }
+    },
+    "testRegex": "/__tests__/[^\\/]*\\.js$"
+  },
   "keywords": [],
   "license": "MIT",
   "main": "index.js",
@@ -44,8 +56,9 @@
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
     "flow_check": "flow check",
+    "jest": "jest",
     "posttest": "npm run eslint && npm run flow_check && npm run fixpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run jest",
     "webpack": "webpack"
   }
 }
