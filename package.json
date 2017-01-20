@@ -8,13 +8,15 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "angular": "^1.6.1",
     "eslint": "^3.13.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-node": "^3.0.5",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "fixpack": "^2.3.1",
-    "flow-bin": "^0.38.0"
+    "flow-bin": "^0.38.0",
+    "webpack": "^2.2.0"
   },
   "directories": {
     "test": "test"
@@ -27,6 +29,9 @@
   "keywords": [],
   "license": "MIT",
   "main": "index.js",
+  "peerDependencies": {
+    "angular": "^1.6.1"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -35,10 +40,12 @@
     "url": "git+https://github.com/blinkmobile/angular-location.js.git"
   },
   "scripts": {
+    "build": "npm run webpack",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
     "flow_check": "flow check",
     "posttest": "npm run eslint && npm run flow_check && npm run fixpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
   }
 }
