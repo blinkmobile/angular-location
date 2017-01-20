@@ -1,0 +1,44 @@
+{
+  "name": "@blinkmobile/angular-location",
+  "description": "Angular 1.x components for maps and geolocation",
+  "version": "1.0.0",
+  "author": "Ron Waldon <jokeyrhyme@gmail.com> (https://github.com/jokeyrhyme)",
+  "bugs": {
+    "url": "https://github.com/blinkmobile/angular-location.js/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.13.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-node": "^3.0.5",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "fixpack": "^2.3.1",
+    "flow-bin": "^0.38.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=7",
+    "npm": ">=4"
+  },
+  "homepage": "https://github.com/blinkmobile/angular-location.js#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkmobile/angular-location.js.git"
+  },
+  "scripts": {
+    "eslint": "eslint --fix --cache .",
+    "fixpack": "fixpack",
+    "flow_check": "flow check",
+    "posttest": "npm run eslint && npm run flow_check && npm run fixpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
