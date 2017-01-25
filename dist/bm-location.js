@@ -168,10 +168,6 @@ const JS_URL = 'https://maps.google.com/maps/api/js'
 
 class BmLocationOnMapController {
   constructor ($rootScope) {
-    if (!new.target) {
-      return new BmLocationOnMapController($rootScope)
-    }
-
     Object.assign(this, {
       $rootScope,
 
@@ -263,6 +259,10 @@ mod.component('bmLocationOnMap', {
 `
 })
 
+module.exports = {
+  BmLocationOnMapController
+}
+
 
 /***/ }),
 /* 5 */
@@ -283,10 +283,6 @@ const DEFAULT_ATTRS = __webpack_require__(2).DEFAULT_ATTRS
 
 class BmStaticLocationOnController {
   constructor ($rootScope) {
-    if (!new.target) {
-      return new BmStaticLocationOnController($rootScope)
-    }
-
     Object.assign(this, { $rootScope }, DEFAULT_ATTRS)
   }
 
@@ -346,6 +342,10 @@ mod.component('bmStaticLocationOnMap', {
   </figure>
 `
 })
+
+module.exports = {
+  BmStaticLocationOnController
+}
 
 
 /***/ }),

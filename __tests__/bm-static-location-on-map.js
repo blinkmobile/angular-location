@@ -7,6 +7,7 @@
 const ng = require('angular')
 require('angular-mocks')
 
+const mod = require('../lib/components/bm-static-location-on-map.js')
 require('../lib/index.js')
 
 beforeEach(ng.mock.module('bmLocation'))
@@ -54,4 +55,9 @@ test('invalid [coords]', () => {
   const element = $compile(html)($rootScope)
   $rootScope.$digest()
   expect(element.html()).toMatchSnapshot()
+})
+
+test('controller constructor', () => {
+  const ctrl = new mod.BmStaticLocationOnController({})
+  expect(ctrl).toBeDefined()
 })

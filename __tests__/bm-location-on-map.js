@@ -6,8 +6,8 @@
 
 const ng = require('angular')
 require('angular-mocks')
-require('ngmap')
 
+const mod = require('../lib/components/bm-location-on-map.js')
 require('../lib/index.js')
 
 beforeEach(ng.mock.module('bmLocation'))
@@ -88,4 +88,9 @@ test('$rootScope.googleMapsApiKey, [coords] [disabled] [readonly]', () => {
   const element = $compile(html)($rootScope)
   $rootScope.$digest()
   expect(element.html()).toMatchSnapshot()
+})
+
+test('controller constructor', () => {
+  const ctrl = new mod.BmLocationOnMapController({})
+  expect(ctrl).toBeDefined()
 })
