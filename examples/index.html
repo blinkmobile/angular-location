@@ -1,14 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app" ng-strict-di="ng-strict-di">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Examples</title>
 </head>
-<body ng-app="app">
+<body ng-controller="BmLocationOnMapDemoController">
   <h1>Examples</h1>
   <section>
-    <bm-location-on-map />
+    <h2>Controls</h2>
+    <label>
+      <input type="checkbox" ng-model="demo.disabled" value="disabled" />
+      disabled
+    </label>
+    <label>
+      <input type="checkbox" ng-model="demo.readonly" value="readonly" />
+      readonly
+    </label>
+    <br />
+    <label>
+      latitude
+      <input type="number" ng-model="demo.coords.latitude" step="0.0001" />
+    </label>
+    <label>
+      longitude
+      <input type="number" ng-model="demo.coords.longitude" step="0.0001" />
+    </label>
+    <div>
+      <code>{{demo | json}}</code>
+    </div>
+  </section>
+  <section>
+    <h2>bm-static-location-on-map</h2>
+    <code>bm-static-location-on-map [coords]</code>
+    <bm-static-location-on-map
+      coords="demo.coords"
+    ></bm-static-location-on-map>
+  </section>
+  <section>
+    <h2>bm-location-on-map</h2>
+    <code>bm-location-on-map [coords] [disabled] [readonly]</code>
+    <bm-location-on-map
+      coords="demo.coords"
+      disabled="{{demo.disabled}}"
+      on-change="onChange(value)"
+      readonly="{{demo.readonly}}"
+    ></bm-location-on-map>
   </section>
   <script src="../node_modules/angular/angular.js"></script>
   <script src="../dist/bm-location.js"></script>

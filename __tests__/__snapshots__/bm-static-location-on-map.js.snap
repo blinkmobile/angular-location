@@ -6,6 +6,14 @@ exports[`test $rootScope.googleMapsApiKey, [coords], [height], [width], [zoom] 1
 "
 `;
 
+exports[`test invalid [coords] 1`] = `
+"
+  <figure>
+    <img ng-src=\"\" title=\"map of unspecified location\" height=\"300\" width=\"300\">
+  </figure>
+"
+`;
+
 exports[`test no attributes 1`] = `
 "
   <figure>

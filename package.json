@@ -6,7 +6,9 @@
   "bugs": {
     "url": "https://github.com/blinkmobile/angular-location.js/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ngmap": "^1.17.8"
+  },
   "devDependencies": {
     "angular": "^1.6.1",
     "angular-mocks": "^1.6.1",

@@ -6,6 +6,7 @@
 
 const ng = require('angular')
 require('angular-mocks')
+require('ngmap')
 
 require('../lib/index.js')
 
@@ -17,8 +18,74 @@ beforeEach(ng.mock.inject((_$compile_, _$rootScope_) => {
   $rootScope = _$rootScope_
 }))
 
-test('adds component template HTML to DOM', () => {
-  const element = $compile('<bm-location-on-map></bm-location-on-map>')($rootScope)
+test('no attributes', () => {
+  const html = '<bm-location-on-map></bm-location-on-map>'
+
+  const element = $compile(html)($rootScope)
+  $rootScope.$digest()
+  expect(element.html()).toMatchSnapshot()
+})
+
+test('$rootScope.googleMapsApiKey, [coords]', () => {
+  $rootScope.googleMapsApiKey = 'secret'
+  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
+
+  const html = `
+  <bm-location-on-map
+    coords='${coords}'
+  ></bm-location-on-map>
+  `
+
+  const element = $compile(html)($rootScope)
+  $rootScope.$digest()
+  expect(element.html()).toMatchSnapshot()
+})
+
+test('$rootScope.googleMapsApiKey, [coords] [disabled]', () => {
+  $rootScope.googleMapsApiKey = 'secret'
+  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
+
+  const html = `
+  <bm-location-on-map
+    coords='${coords}'
+    disabled="disabled"
+  ></bm-location-on-map>
+  `
+
+  const element = $compile(html)($rootScope)
+  $rootScope.$digest()
+  expect(element.html()).toMatchSnapshot()
+})
+
+test('$rootScope.googleMapsApiKey, [coords] [readonly]', () => {
+  $rootScope.googleMapsApiKey = 'secret'
+  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
+
+  const html = `
+  <bm-location-on-map
+    coords='${coords}'
+    readonly="readonly"
+  ></bm-location-on-map>
+  `
+
+  const element = $compile(html)($rootScope)
+  $rootScope.$digest()
+  expect(element.html()).toMatchSnapshot()
+})
+
+test('$rootScope.googleMapsApiKey, [coords] [disabled] [readonly]', () => {
+  $rootScope.googleMapsApiKey = 'secret'
+  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
+
+  const html = `
+  <bm-location-on-map
+    coords='${coords}'
+    disabled="disabled"
+    readonly="readonly"
+  ></bm-location-on-map>
+  `
+
+  const element = $compile(html)($rootScope)
   $rootScope.$digest()
   expect(element.html()).toMatchSnapshot()
 })
