@@ -1,7 +1,7 @@
 exports[`test $rootScope.googleMapsApiKey, [coords], [height], [width], [zoom] 1`] = `
 "
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?center=-35%2C150&amp;key=secret&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10\" title=\"map with center at -35 latitude, 150 longitude\" height=\"200\" width=\"200\" src=\"https://maps.googleapis.com/maps/api/staticmap?center=-35%2C150&amp;key=secret&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10\" title=\"map with center at -35 latitude, 150 longitude\" height=\"200\" width=\"200\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10\">
   </figure>
 "
 `;

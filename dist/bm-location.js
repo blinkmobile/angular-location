@@ -89,7 +89,7 @@ module.exports = ng.module('bmLocation', [ 'ngMap' ])
 /* @flow */
 
 
-function isCoordsValid (coords) {
+function isCoordsValid (coords /* : any */) {
   if (!coords) {
     return false
   }
@@ -98,14 +98,14 @@ function isCoordsValid (coords) {
   return !isNaN(latitude) && !isNaN(longitude)
 }
 
-function parseBooleanAttribute (value) {
+function parseBooleanAttribute (value /* : any */) {
   if (!value || value === 'false') {
     return false
   }
   return true
 }
 
-function parseCoords (coords) {
+function parseCoords (coords /* : string | ?Object | void */) /* : Object */ {
   if (!coords) {
     return {}
   }
@@ -135,8 +135,8 @@ module.exports = {
 
 
 const DEFAULT_ATTRS = {
-  height: '300',
-  width: '300',
+  height: 300,
+  width: 300,
   zoom: 5
 }
 
@@ -159,18 +159,37 @@ module.exports = angular;
 /* @flow */
 
 
-const mod = __webpack_require__(0)
+/* :: import type {
+  AngularCallback, Coordinates, GoogleMapsMouseEvent
+} from '../../types.js' */
 
+const mod = __webpack_require__(0)
 const utils = __webpack_require__(1)
 const DEFAULT_ATTRS = __webpack_require__(2).DEFAULT_ATTRS
 
 const JS_URL = 'https://maps.google.com/maps/api/js'
 
 class BmLocationOnMapController {
-  constructor ($rootScope) {
-    Object.assign(this, {
-      $rootScope,
+  /* :: static $inject: string[] */
 
+  // internal use
+
+  /* :: googleMapsUrl: string */
+  /* :: onDragEnd: (event: Object) => void */
+  /* :: style: Object */
+
+  // public attributes (after casts / checks)
+
+  /* :: coords: Coordinates */
+  /* :: disabled: boolean */
+  /* :: height: number */
+  /* :: onChange: AngularCallback */
+  /* :: readonly: boolean */
+  /* :: width: number */
+  /* :: zoom: number */
+
+  constructor ($rootScope /* : Object */) {
+    Object.assign(this, {
       googleMapsUrl: `${JS_URL}?key=${$rootScope.googleMapsApiKey}`
     }, DEFAULT_ATTRS)
 
@@ -179,16 +198,14 @@ class BmLocationOnMapController {
 
   $onInit () {}
 
-  $onDestroy () {
-    this.$rootScope = null
-  }
+  $onDestroy () {}
 
   $onChanges () {
     this.disabled = utils.parseBooleanAttribute(this.disabled)
     this.readonly = utils.parseBooleanAttribute(this.readonly)
 
-    this.height = this.height || DEFAULT_ATTRS.height
-    this.width = this.width || DEFAULT_ATTRS.width
+    this.height = Number(this.height) || DEFAULT_ATTRS.height
+    this.width = Number(this.width) || DEFAULT_ATTRS.width
     this.zoom = Number(this.zoom) || DEFAULT_ATTRS.zoom
 
     this.coords = utils.parseCoords(this.coords)
@@ -209,7 +226,7 @@ class BmLocationOnMapController {
   // for an explanation of `this.onChange({ value: { /* ... */ } })`
   // see: http://www.codelord.net/2016/05/13/understanding-angulars-and-binding/
 
-  onDragEnd (event) {
+  onDragEnd (event /* : GoogleMapsMouseEvent */) {
     if (typeof this.onChange === 'function') {
       this.onChange({
         value: {
@@ -274,23 +291,37 @@ module.exports = {
 
 const querystring = __webpack_require__(9)
 
+/* :: import type { Coordinates } from '../../types.js' */
+
 const mod = __webpack_require__(0)
-
-const API_URL = 'https://maps.googleapis.com/maps/api/staticmap'
-
 const utils = __webpack_require__(1)
 const DEFAULT_ATTRS = __webpack_require__(2).DEFAULT_ATTRS
 
+const API_URL = 'https://maps.googleapis.com/maps/api/staticmap'
+
 class BmStaticLocationOnController {
-  constructor ($rootScope) {
-    Object.assign(this, { $rootScope }, DEFAULT_ATTRS)
+  /* :: static $inject : string[] */
+
+  // internal use
+
+  /* :: googleMapsUrl: string */
+
+  // public attributes (after casts)
+
+  /* :: coords: Coordinates */
+  /* :: height: number */
+  /* :: width: number */
+  /* :: zoom: number */
+
+  constructor ($rootScope /* : Object */) {
+    Object.assign(this, {
+      googleMapsUrl: `${API_URL}?key=${$rootScope.googleMapsApiKey}`
+    }, DEFAULT_ATTRS)
   }
 
   $onInit () {}
 
-  $onDestroy () {
-    this.$rootScope = null
-  }
+  $onDestroy () {}
 
   $onChanges () {
     this.height = this.height || DEFAULT_ATTRS.height
@@ -310,13 +341,12 @@ class BmStaticLocationOnController {
     }
     const qsa = querystring.stringify({
       center: `${this.coords.latitude},${this.coords.longitude}`,
-      key: this.$rootScope.googleMapsApiKey,
       markers: `color:red|${this.coords.latitude},${this.coords.longitude}`,
       scale: 2, // retina
       size: `${this.width}x${this.height}`,
       zoom: this.zoom
     })
-    return `${API_URL}?${qsa}`
+    return `${this.googleMapsUrl}&${qsa}`
   }
 
   title () {

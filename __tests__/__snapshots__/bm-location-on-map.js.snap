@@ -2,7 +2,7 @@ exports[`test $rootScope.googleMapsApiKey, [coords] [disabled] [readonly] 1`] = 
 "
   <!-- ngIf: $ctrl.disabled --><bm-static-location-on-map ng-if=\"$ctrl.disabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?center=-35%2C150&amp;key=secret&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\" title=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?center=-35%2C150&amp;key=secret&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\" title=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.disabled -->
   <!-- ngIf: !$ctrl.disabled -->
@@ -13,7 +13,7 @@ exports[`test $rootScope.googleMapsApiKey, [coords] [disabled] 1`] = `
 "
   <!-- ngIf: $ctrl.disabled --><bm-static-location-on-map ng-if=\"$ctrl.disabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?center=-35%2C150&amp;key=secret&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\" title=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?center=-35%2C150&amp;key=secret&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\" title=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=300x300&amp;zoom=5\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.disabled -->
   <!-- ngIf: !$ctrl.disabled -->
