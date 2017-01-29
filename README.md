@@ -33,18 +33,35 @@ Uses Google's JavaScript Maps API
 
 Attributes:
 
--   disabled?: boolean | string
+-   ngDisabled?: boolean | string
+-   ngReadonly?: boolean | string
 -   onChange?: function
--   readonly?: boolean | string
 -   ... plus all attributes for bmStaticLocationOnMap (above)
 
-If "disabled", then the map will not be interactive at all
+If "ngDisabled", then the map will not be interactive at all
 
-If "readonly", then user can pan the map, but the pin will be inert
+If "ngReadonly", then user can pan the map, but the pin will be inert
 
 Otherwise, the pin is interactive and the user may reposition it
 
 This features a 1-way data-binding design, so this component notifies the parent controller / component / scope when the pin's position changes
+
+
+### bmConfirmLocationOnMap
+
+Displays an interactive map, with a pin at the desired coordinates
+
+Uses Google's JavaScript Maps API
+
+Attributes:
+
+-   ngDisabled?: boolean | string
+-   ngReadonly?: boolean | string
+-   ngModel?: [ngModel](https://docs.angularjs.org/api/ng/directive/ngModel)
+
+Field is interative when neither "ngDisabled" or "ngReadonly" are truthy
+
+This features a 2-way data-binding design via ngModel
 
 
 ## Testing

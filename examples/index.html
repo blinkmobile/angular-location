@@ -42,11 +42,21 @@
     <code>bm-location-on-map [coords] [disabled] [readonly]</code>
     <bm-location-on-map
       coords="demo.coords"
-      disabled="{{demo.disabled}}"
+      ng-disabled="{{demo.disabled}}"
       on-change="onChange(value)"
-      readonly="{{demo.readonly}}"
+      ng-readonly="{{demo.readonly}}"
     ></bm-location-on-map>
   </section>
+  <section>
+    <h2>bm-confirm-location-on-map</h2>
+    <code>bm-confirm-location-on-map</code>
+    <bm-confirm-location-on-map
+      ng-disabled="{{demo.disabled}}"
+      ng-model="demo.coords"
+      ng-readonly="{{demo.readonly}}"
+    ></bm-confirm-location-on-map>
+  </section>
+
   <script src="../node_modules/angular/angular.js"></script>
   <script src="../dist/bm-location.js"></script>
   <script src="./app.js"></script>

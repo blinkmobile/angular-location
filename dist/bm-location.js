@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -76,7 +76,7 @@
 
 const ng = __webpack_require__(3)
 
-__webpack_require__(6)
+__webpack_require__(8)
 
 module.exports = ng.module('bmLocation', [ 'ngMap' ])
 
@@ -137,7 +137,7 @@ module.exports = {
 const DEFAULT_ATTRS = {
   height: 300,
   width: 300,
-  zoom: 5
+  zoom: 10
 }
 
 module.exports = {
@@ -153,6 +153,128 @@ module.exports = angular;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* @flow */
+
+
+const geolocation = __webpack_require__(7)
+
+/* :: import type { NgModelController } from '../../types.js' */
+
+const mod = __webpack_require__(0)
+const utils = __webpack_require__(1)
+
+class BmConfirmLocationOnMapController {
+  /* :: static $inject : string[] */
+
+  // internal use
+
+  /* :: isEditing: boolean */
+
+  // public attributes (after casts / checks)
+
+  /* :: ngDisabled: boolean */
+  /* :: ngModel: NgModelController */
+  /* :: ngReadonly: boolean */
+
+  constructor () {
+    this.isEditing = false
+  }
+
+  $onInit (...args) {
+  }
+
+  $onChanges (...args) {
+    this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
+    this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly)
+  }
+
+  onCancel (event /* : Event */) {
+    this.ngModel.$rollbackViewValue()
+    this.isEditing = false
+  }
+
+  onClear (event /* : Event */) {
+    this.ngModel.$setViewValue(null, event)
+    this.ngModel.$commitViewValue()
+  }
+
+  onConfirm (event /* : Event */) {
+    this.ngModel.$commitViewValue()
+    this.isEditing = false
+  }
+
+  onFindMe (event /* : Event */) {
+    geolocation.getCurrentPosition()
+      .then((position) => {
+        const { latitude, longitude } = position.coords
+        this.ngModel.$setViewValue({ latitude, longitude }, event)
+      })
+  }
+
+  onEdit (event /* : Event */) {
+    this.isEditing = true
+  }
+}
+
+BmConfirmLocationOnMapController.$inject = []
+
+mod.component('bmConfirmLocationOnMap', {
+  bindings: {
+    ngDisabled: '@?',
+    ngReadonly: '@?'
+  },
+  controller: BmConfirmLocationOnMapController,
+  require: {
+    ngModel: 'ngModel'
+  },
+  template: `
+  <div>
+    <bm-location-on-map
+      coords="$ctrl.ngModel.$viewValue"
+      ng-disabled="{{!$ctrl.isEditing}}"
+      ng-readonly="{{$ctrl.ngReadonly}}"
+    ></bm-location-on-map>
+
+    <div ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly">
+
+      <button type="button"
+        ng-if="$ctrl.isEditing"
+        ng-click="$ctrl.onCancel()"
+      >Cancel</button>
+      <button type="button"
+        ng-if="$ctrl.isEditing"
+        ng-click="$ctrl.onFindMe()"
+      >Find Me</button>
+      <button type="button"
+        ng-if="$ctrl.isEditing"
+        ng-click="$ctrl.onConfirm()"
+      >Confirm</button>
+
+      <button type="button"
+        ng-if="!$ctrl.isEditing"
+        ng-click="$ctrl.onClear()"
+      >Clear</button>
+      <button type="button"
+        ng-if="!$ctrl.isEditing"
+        ng-click="$ctrl.onEdit()"
+      >Edit
+      </button>
+
+    </div>
+  </div>
+`
+})
+
+module.exports = {
+  BmConfirmLocationOnMapController
+}
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -181,10 +303,10 @@ class BmLocationOnMapController {
   // public attributes (after casts / checks)
 
   /* :: coords: Coordinates */
-  /* :: disabled: boolean */
   /* :: height: number */
+  /* :: ngDisabled: boolean */
+  /* :: ngReadonly: boolean */
   /* :: onChange: AngularCallback */
-  /* :: readonly: boolean */
   /* :: width: number */
   /* :: zoom: number */
 
@@ -201,8 +323,8 @@ class BmLocationOnMapController {
   $onDestroy () {}
 
   $onChanges () {
-    this.disabled = utils.parseBooleanAttribute(this.disabled)
-    this.readonly = utils.parseBooleanAttribute(this.readonly)
+    this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
+    this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly)
 
     this.height = Number(this.height) || DEFAULT_ATTRS.height
     this.width = Number(this.width) || DEFAULT_ATTRS.width
@@ -242,21 +364,21 @@ BmLocationOnMapController.$inject = [ '$rootScope' ]
 mod.component('bmLocationOnMap', {
   bindings: {
     coords: '<?',
-    disabled: '@?',
     height: '@?',
+    ngDisabled: '@?',
+    ngReadonly: '@?',
     onChange: '&?',
-    readonly: '@?',
     width: '@?',
     zoom: '@?'
   },
   controller: BmLocationOnMapController,
   template: `
   <bm-static-location-on-map
-    ng-if="$ctrl.disabled"
+    ng-if="$ctrl.ngDisabled"
     coords="$ctrl.coords"
   ></bm-static-location-on-map>
   <figure
-    ng-if="!$ctrl.disabled"
+    ng-if="!$ctrl.ngDisabled"
     map-lazy-load="https://maps.google.com/maps/api/js"
     map-lazy-load-params="{{$ctrl.googleMapsUrl}}"
   >
@@ -267,7 +389,7 @@ mod.component('bmLocationOnMap', {
     >
       <marker
         animation="Animation.DROP"
-        draggable="{{!$ctrl.readonly}}"
+        draggable="{{!$ctrl.ngReadonly}}"
         on-dragend="$ctrl.onDragEnd()"
         position="{{$ctrl.center()}}"
       ></marker>
@@ -282,14 +404,14 @@ module.exports = {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* @flow */
 
 
-const querystring = __webpack_require__(9)
+const querystring = __webpack_require__(11)
 
 /* :: import type { Coordinates } from '../../types.js' */
 
@@ -379,7 +501,120 @@ module.exports = {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* @flow */
+
+
+/* :: import type {
+  GeolocationDriver, PositionLike, PositionOptionsLike
+} from './types.js' */
+
+const DEFAULT_POSITION_OPTIONS /* : PositionOptions */ = {
+  enableHighAccuracy: true,
+  maximumAge: 0, // fresh results each time
+  timeout: 10 * 1000 // take no longer than 10 seconds
+}
+
+function clonePosition (position /* : PositionLike */) /* : PositionLike */ {
+  position = position || {}
+  let coords = position.coords || {}
+  if (typeof position !== 'object' || typeof coords !== 'object') {
+    throw new TypeError('cannot clone non-Position object')
+  }
+  return {
+    coords: {
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      altitude: coords.altitude,
+      accuracy: coords.accuracy,
+      altitudeAccuracy: coords.altitudeAccuracy,
+      heading: coords.heading,
+      speed: coords.speed
+    },
+    timestamp: position.timestamp || Date.now()
+  }
+}
+
+function mergePositionOptions (
+  options /* :? PositionOptionsLike */
+) /* : PositionOptions */ {
+  options = options || {}
+  if (typeof options !== 'object') {
+    return DEFAULT_POSITION_OPTIONS
+  }
+
+  return {
+    enableHighAccuracy: typeof options.enableHighAccuracy === 'boolean' ? options.enableHighAccuracy : DEFAULT_POSITION_OPTIONS.enableHighAccuracy,
+
+    maximumAge: typeof options.maximumAge === 'number' && !isNaN(options.maximumAge) ? options.maximumAge : DEFAULT_POSITION_OPTIONS.maximumAge,
+
+    timeout: typeof options.timeout === 'number' && !isNaN(options.timeout) ? options.timeout : DEFAULT_POSITION_OPTIONS.timeout
+  }
+}
+
+const DRIVERS_PREFERENCE = [ 'W3C' ]
+
+const DRIVERS /* : { [id:string]: GeolocationDriver } */ = {
+
+  W3C: {
+    isAvailable: function () /* : boolean */ {
+      return !!(
+        typeof navigator !== 'undefined' &&
+        navigator.geolocation &&
+        typeof navigator.geolocation.getCurrentPosition === 'function'
+      )
+    },
+
+    getCurrentPosition: function (
+      onSuccess /* : (position: PositionLike) => any */,
+      onError /* : (error: PositionError) => any */,
+      options /* : PositionOptions */
+    ) /* : void */ {
+      navigator.geolocation.getCurrentPosition(position => {
+        onSuccess(clonePosition(position))
+      }, onError, options)
+    }
+  }
+
+}
+
+function detectDriver () /* : GeolocationDriver | false */ {
+  const availableDriver = DRIVERS_PREFERENCE
+    .map((name) => DRIVERS[name])
+    .find((driver) => driver.isAvailable())
+  return availableDriver || false
+}
+
+function getCurrentPosition (
+  options /* :? PositionOptionsLike */
+) /* : Promise<PositionLike> */ {
+  const driver = detectDriver()
+  if (!driver) {
+    return Promise.reject(new Error('GeoLocation not supported'))
+  }
+  return new Promise((resolve, reject) => {
+    driver.getCurrentPosition(position => {
+      resolve(position)
+    }, err => {
+      reject(err)
+    }, mergePositionOptions(options))
+  })
+}
+
+module.exports = {
+  DEFAULT_POSITION_OPTIONS,
+
+  clonePosition,
+  getCurrentPosition,
+  mergePositionOptions
+}
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function(root, factory) {
@@ -3688,7 +3923,7 @@ return 'ngMap';
 }));
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3779,7 +4014,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3871,18 +4106,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(7);
-exports.encode = exports.stringify = __webpack_require__(8);
+exports.decode = exports.parse = __webpack_require__(9);
+exports.encode = exports.stringify = __webpack_require__(10);
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3891,6 +4126,7 @@ exports.encode = exports.stringify = __webpack_require__(8);
 
 __webpack_require__(4)
 __webpack_require__(5)
+__webpack_require__(6)
 
 
 /***/ })
