@@ -7,7 +7,7 @@
 const ng = require('angular')
 require('angular-mocks')
 
-const mod = require('../lib/components/bm-location-on-map.js')
+const mod = require('../lib/components/bm-confirm-location-on-map.js')
 require('../lib/index.js')
 
 beforeEach(ng.mock.module('bmLocation'))
@@ -19,21 +19,22 @@ beforeEach(ng.mock.inject((_$compile_, _$rootScope_) => {
 }))
 
 test('no attributes', () => {
-  const html = '<bm-location-on-map></bm-location-on-map>'
-
-  const element = $compile(html)($rootScope)
-  $rootScope.$digest()
-  expect(element.html()).toMatchSnapshot()
+  expect(() => {
+    $rootScope.googleMapsApiKey = 'secret'
+    const html = `
+    <bm-confirm-location-on-map></bm-confirm-location-on-map>
+    `
+    $compile(html)($rootScope)
+  }).toThrow()
 })
 
-test('$rootScope.googleMapsApiKey, [coords]', () => {
+test('$rootScope.googleMapsApiKey [ng-model]', () => {
   $rootScope.googleMapsApiKey = 'secret'
-  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
-
+  $rootScope.coords = null
   const html = `
-  <bm-location-on-map
-    coords='${coords}'
-  ></bm-location-on-map>
+  <bm-confirm-location-on-map
+    ng-model="coords"
+  ></bm-confirm-location-on-map>
   `
 
   const element = $compile(html)($rootScope)
@@ -41,15 +42,14 @@ test('$rootScope.googleMapsApiKey, [coords]', () => {
   expect(element.html()).toMatchSnapshot()
 })
 
-test('$rootScope.googleMapsApiKey, [coords] [ng-disabled]', () => {
+test('$rootScope.googleMapsApiKey [ng-disabled] [ng-model]', () => {
   $rootScope.googleMapsApiKey = 'secret'
-  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
-
+  $rootScope.coords = null
   const html = `
-  <bm-location-on-map
-    coords='${coords}'
+  <bm-confirm-location-on-map
     ng-disabled="ng-disabled"
-  ></bm-location-on-map>
+    ng-model="coords"
+  ></bm-confirm-location-on-map>
   `
 
   const element = $compile(html)($rootScope)
@@ -57,15 +57,14 @@ test('$rootScope.googleMapsApiKey, [coords] [ng-disabled]', () => {
   expect(element.html()).toMatchSnapshot()
 })
 
-test('$rootScope.googleMapsApiKey, [coords] [ng-readonly]', () => {
+test('$rootScope.googleMapsApiKey [ng-model] [ng-readonly]', () => {
   $rootScope.googleMapsApiKey = 'secret'
-  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
-
+  $rootScope.coords = null
   const html = `
-  <bm-location-on-map
-    coords='${coords}'
+  <bm-confirm-location-on-map
     ng-readonly="ng-readonly"
-  ></bm-location-on-map>
+    ng-model="coords"
+  ></bm-confirm-location-on-map>
   `
 
   const element = $compile(html)($rootScope)
@@ -73,16 +72,15 @@ test('$rootScope.googleMapsApiKey, [coords] [ng-readonly]', () => {
   expect(element.html()).toMatchSnapshot()
 })
 
-test('$rootScope.googleMapsApiKey, [coords] [ng-disabled] [ng-readonly]', () => {
+test('$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly]', () => {
   $rootScope.googleMapsApiKey = 'secret'
-  const coords = JSON.stringify({ latitude: -35, longitude: 150 })
-
+  $rootScope.coords = null
   const html = `
-  <bm-location-on-map
-    coords='${coords}'
+  <bm-confirm-location-on-map
     ng-disabled="ng-disabled"
+    ng-model="coords"
     ng-readonly="ng-readonly"
-  ></bm-location-on-map>
+  ></bm-confirm-location-on-map>
   `
 
   const element = $compile(html)($rootScope)
@@ -91,6 +89,6 @@ test('$rootScope.googleMapsApiKey, [coords] [ng-disabled] [ng-readonly]', () => 
 })
 
 test('controller constructor', () => {
-  const ctrl = new mod.BmLocationOnMapController({})
+  const ctrl = new mod.BmConfirmLocationOnMapController({})
   expect(ctrl).toBeDefined()
 })
