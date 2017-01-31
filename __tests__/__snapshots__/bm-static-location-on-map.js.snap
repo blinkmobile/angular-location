@@ -1,7 +1,7 @@
 exports[`test $rootScope.googleMapsApiKey, [coords], [height], [width], [zoom] 1`] = `
 "
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10\" title=\"map with center at -35 latitude, 150 longitude\" height=\"200\" width=\"200\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10&amp;markers=color%3Ared%7C-35%2C150\" alt=\"map with center at -35 latitude, 150 longitude\" height=\"200\" width=\"200\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=-35%2C150&amp;scale=2&amp;size=200x200&amp;zoom=10&amp;markers=color%3Ared%7C-35%2C150\">
   </figure>
 "
 `;
@@ -9,7 +9,7 @@ exports[`test $rootScope.googleMapsApiKey, [coords], [height], [width], [zoom] 1
 exports[`test invalid [coords] 1`] = `
 "
   <figure>
-    <img ng-src=\"\" title=\"map of unspecified location\" height=\"300\" width=\"300\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\">
   </figure>
 "
 `;
@@ -17,7 +17,7 @@ exports[`test invalid [coords] 1`] = `
 exports[`test no attributes 1`] = `
 "
   <figure>
-    <img ng-src=\"\" title=\"map of unspecified location\" height=\"300\" width=\"300\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=undefined&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=undefined&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\">
   </figure>
 "
 `;

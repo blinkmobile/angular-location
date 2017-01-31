@@ -183,10 +183,9 @@ class BmConfirmLocationOnMapController {
     this.isEditing = false
   }
 
-  $onInit (...args) {
-  }
+  $onInit () {}
 
-  $onChanges (...args) {
+  $onChanges () {
     this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
     this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly)
   }
@@ -209,7 +208,7 @@ class BmConfirmLocationOnMapController {
   onFindMe (event /* : Event */) {
     geolocation.getCurrentPosition()
       .then((position) => {
-        const { latitude, longitude } = position.coords
+        const { latitude, longitude } = position.coords || {}
         this.ngModel.$setViewValue({ latitude, longitude }, event)
       })
   }
@@ -458,16 +457,23 @@ class BmStaticLocationOnController {
   }
 
   imgSrc () {
-    if (!this.isValid()) {
-      return ''
-    }
-    const qsa = querystring.stringify({
+    const options = {
       center: `${this.coords.latitude},${this.coords.longitude}`,
-      markers: `color:red|${this.coords.latitude},${this.coords.longitude}`,
       scale: 2, // retina
       size: `${this.width}x${this.height}`,
       zoom: this.zoom
-    })
+    }
+    if (!this.isValid()) {
+      const qsa = querystring.stringify(Object.assign({}, options, {
+        center: '0,0',
+        zoom: 0
+      }))
+      return `${this.googleMapsUrl}&${qsa}`
+    }
+
+    const qsa = querystring.stringify(Object.assign({}, options, {
+      markers: `color:red|${this.coords.latitude},${this.coords.longitude}`
+    }))
     return `${this.googleMapsUrl}&${qsa}`
   }
 
