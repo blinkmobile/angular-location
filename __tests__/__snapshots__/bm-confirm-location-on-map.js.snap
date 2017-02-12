@@ -4,7 +4,7 @@ exports[`test $rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly]
     <bm-location-on-map coords=\"$ctrl.ngModel.$viewValue\" ng-disabled=\"true\" ng-readonly=\"true\" class=\"ng-isolate-scope\" readonly=\"readonly\" disabled=\"disabled\">
   <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\"$ctrl.ngDisabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
   <!-- ngIf: !$ctrl.ngDisabled -->
@@ -21,7 +21,7 @@ exports[`test $rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
     <bm-location-on-map coords=\"$ctrl.ngModel.$viewValue\" ng-disabled=\"true\" ng-readonly=\"false\" class=\"ng-isolate-scope\" disabled=\"disabled\">
   <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\"$ctrl.ngDisabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
   <!-- ngIf: !$ctrl.ngDisabled -->
@@ -38,7 +38,7 @@ exports[`test $rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
     <bm-location-on-map coords=\"$ctrl.ngModel.$viewValue\" ng-disabled=\"true\" ng-readonly=\"true\" class=\"ng-isolate-scope\" readonly=\"readonly\" disabled=\"disabled\">
   <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\"$ctrl.ngDisabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
   <!-- ngIf: !$ctrl.ngDisabled -->
@@ -55,7 +55,7 @@ exports[`test $rootScope.googleMapsApiKey [ng-model] 1`] = `
     <bm-location-on-map coords=\"$ctrl.ngModel.$viewValue\" ng-disabled=\"true\" ng-readonly=\"false\" class=\"ng-isolate-scope\" disabled=\"disabled\">
   <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\"$ctrl.ngDisabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
   <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;center=0%2C0&amp;scale=2&amp;size=300x300&amp;zoom=0\">
+    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\" alt=\"map of unspecified location\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
   <!-- ngIf: !$ctrl.ngDisabled -->
