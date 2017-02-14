@@ -161,7 +161,9 @@ module.exports = angular;
 
 const geolocation = __webpack_require__(7)
 
-/* :: import type { NgModelController } from '../../types.js' */
+/* :: import type {
+  AngularCallbackOptions, Coordinates, NgModelController
+} from '../../types.js' */
 
 const mod = __webpack_require__(0)
 const utils = __webpack_require__(1)
@@ -171,6 +173,8 @@ class BmConfirmLocationOnMapController {
 
   // internal use
 
+  /* :: $digest: () => void */
+  /* :: coords: ?Coordinates */
   /* :: isEditing: boolean */
 
   // public attributes (after casts / checks)
@@ -179,7 +183,9 @@ class BmConfirmLocationOnMapController {
   /* :: ngModel: NgModelController */
   /* :: ngReadonly: boolean */
 
-  constructor () {
+  constructor ($scope /* : Object */) {
+    this.$digest = $scope.$digest.bind($scope)
+    this.coords = null
     this.isEditing = false
   }
 
@@ -188,28 +194,34 @@ class BmConfirmLocationOnMapController {
   $onChanges () {
     this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
     this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly)
+    this.coords = this.ngModel.$viewValue
   }
 
   onCancel (event /* : Event */) {
-    this.ngModel.$rollbackViewValue()
+    this.coords = this.ngModel.$viewValue
     this.isEditing = false
+  }
+
+  onChange (value /* : ?Coordinates */) {
+    this.coords = value
   }
 
   onClear (event /* : Event */) {
-    this.ngModel.$setViewValue(null, event)
-    this.ngModel.$commitViewValue()
+    this.coords = null
+    this.ngModel.$setViewValue(this.coords, event)
   }
 
   onConfirm (event /* : Event */) {
-    this.ngModel.$commitViewValue()
     this.isEditing = false
+    this.ngModel.$setViewValue(this.coords, event)
   }
 
   onFindMe (event /* : Event */) {
     geolocation.getCurrentPosition()
       .then((position) => {
         const { latitude, longitude } = position.coords || {}
-        this.ngModel.$setViewValue({ latitude, longitude }, event)
+        this.coords = { latitude, longitude } || null
+        this.$digest()
       })
   }
 
@@ -218,7 +230,7 @@ class BmConfirmLocationOnMapController {
   }
 }
 
-BmConfirmLocationOnMapController.$inject = []
+BmConfirmLocationOnMapController.$inject = [ '$scope' ]
 
 mod.component('bmConfirmLocationOnMap', {
   bindings: {
@@ -232,9 +244,10 @@ mod.component('bmConfirmLocationOnMap', {
   template: `
   <div>
     <bm-location-on-map
-      coords="$ctrl.ngModel.$viewValue"
+      coords="$ctrl.coords"
       ng-disabled="{{!$ctrl.isEditing}}"
       ng-readonly="{{$ctrl.ngReadonly}}"
+      on-change="$ctrl.onChange(value)"
     ></bm-location-on-map>
 
     <div ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly">
