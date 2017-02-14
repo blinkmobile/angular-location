@@ -94,3 +94,14 @@ test('controller constructor', () => {
   const ctrl = new mod.BmLocationOnMapController({})
   expect(ctrl).toBeDefined()
 })
+
+test('$onChanges correctly populates style', () => {
+  const ctrl = new mod.BmLocationOnMapController({})
+
+  const FAKE_STYLE = { height: 600, width: 600 }
+  Object.assign(ctrl, FAKE_STYLE)
+
+  ctrl.$onChanges()
+
+  expect(ctrl.style).toMatchObject(FAKE_STYLE)
+})

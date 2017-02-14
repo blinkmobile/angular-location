@@ -28,7 +28,7 @@
     "test": "__tests__"
   },
   "engines": {
-    "node": ">=7",
+    "node": ">=6",
     "npm": ">=4"
   },
   "homepage": "https://github.com/blinkmobile/angular-location.js#readme",

@@ -7,6 +7,13 @@
 const ng = require('angular')
 require('angular-mocks')
 
+jest.mock('@blinkmobile/geolocation', () => ({
+  getCurrentPosition: jest.fn(() => Promise.resolve({
+    coords: { latitude: 10, longitude: 10 }
+  }))
+}))
+
+const fakes = require('./helpers/fakes.js')
 const mod = require('../lib/components/bm-confirm-location-on-map.js')
 require('../lib/index.js')
 
@@ -89,6 +96,37 @@ test('$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly]', () =>
 })
 
 test('controller constructor', () => {
-  const ctrl = new mod.BmConfirmLocationOnMapController({})
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
   expect(ctrl).toBeDefined()
+})
+
+test('onEdit() does not trigger geolocation if coords is set', () => {
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+  const { getCurrentPosition } = require('@blinkmobile/geolocation')
+
+  ctrl.onChange({ latitude: 10, longitude: 10 })
+  ctrl.onEdit()
+
+  expect((getCurrentPosition /* : Function */).mock.calls.length).toBe(0)
+})
+
+test('onEdit() does trigger geolocation if coords is set', () => {
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+  const { getCurrentPosition } = require('@blinkmobile/geolocation')
+
+  ctrl.onChange(null)
+  ctrl.onEdit()
+
+  expect((getCurrentPosition /* : Function */).mock.calls.length).toBe(1)
+})
+
+test('$onChanges correctly copies coords', () => {
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+
+  const FAKE_COORDS = { latitude: 20, longitude: 20 }
+  ctrl.ngModel = Object.assign(fakes.fakeNgModel(), { $viewValue: FAKE_COORDS })
+
+  ctrl.$onChanges()
+
+  expect(ctrl.coords).toMatchObject(FAKE_COORDS)
 })
