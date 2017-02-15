@@ -126,8 +126,16 @@ mod.controller('MyController', MyController)
 ```
 
 
+## Development
+
+-   `npm run build` produces output in the "dist" directory
+
+-   `npm test` executes tests
+
+
 ## Testing
 
-You may find it useful to temporarily change the Google Maps API key in the example app.js file to perform manual tests.
+We recommend using [http-server](https://github.com/indexzero/http-server) or similar.
 
+You may find it useful to temporarily change the Google Maps API key in the example app.js file to perform manual tests.
 Take care not to commit this to version control.
