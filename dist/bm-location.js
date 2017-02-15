@@ -216,17 +216,30 @@ class BmConfirmLocationOnMapController {
     this.ngModel.$setViewValue(this.coords, event)
   }
 
-  onFindMe (event /* : Event */) {
+  onFindMe () {
     geolocation.getCurrentPosition()
       .then((position) => {
-        const { latitude, longitude } = position.coords || {}
-        this.coords = { latitude, longitude } || null
+        if (position.coords) {
+          const { latitude = 0, longitude = 0 } = position.coords || {}
+          this.coords = { latitude, longitude }
+        } else {
+          this.coords = null
+        }
         this.$digest()
+      })
+      .catch((err /* : Error */) => {
+        /* eslint-disable no-console */ // useful for debugging
+        console.error('geolocation.getCurrentPosition()', err)
+        /* eslint-enable no-console */
+        this.coords = null
       })
   }
 
-  onEdit (event /* : Event */) {
+  onEdit () {
     this.isEditing = true
+    if (!this.coords) {
+      this.onFindMe()
+    }
   }
 }
 
@@ -242,7 +255,7 @@ mod.component('bmConfirmLocationOnMap', {
     ngModel: 'ngModel'
   },
   template: `
-  <div>
+  <div class="bm-location">
     <bm-location-on-map
       coords="$ctrl.coords"
       ng-disabled="{{!$ctrl.isEditing}}"
@@ -250,26 +263,34 @@ mod.component('bmConfirmLocationOnMap', {
       on-change="$ctrl.onChange(value)"
     ></bm-location-on-map>
 
-    <div ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly">
+    <div
+      class="bm-location__button-container"
+      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"
+    >
 
       <button type="button"
+        class="bm-location__button bm-location__button-cancel"
         ng-if="$ctrl.isEditing"
         ng-click="$ctrl.onCancel()"
       >Cancel</button>
       <button type="button"
+        class="bm-location__button bm-location__button-findme"
         ng-if="$ctrl.isEditing"
         ng-click="$ctrl.onFindMe()"
       >Find Me</button>
       <button type="button"
+        class="bm-location__button bm-location__button-confirm"
         ng-if="$ctrl.isEditing"
         ng-click="$ctrl.onConfirm()"
       >Confirm</button>
 
       <button type="button"
+        class="bm-location__button bm-location__button-clear"
         ng-if="!$ctrl.isEditing"
         ng-click="$ctrl.onClear()"
       >Clear</button>
       <button type="button"
+        class="bm-location__button bm-location__button-edit"
         ng-if="!$ctrl.isEditing"
         ng-click="$ctrl.onEdit()"
       >Edit
@@ -390,11 +411,13 @@ mod.component('bmLocationOnMap', {
     coords="$ctrl.coords"
   ></bm-static-location-on-map>
   <figure
+    class="bm-location__map-container"
     ng-if="!$ctrl.ngDisabled"
     map-lazy-load="https://maps.google.com/maps/api/js"
     map-lazy-load-params="{{$ctrl.googleMapsUrl}}"
   >
     <ng-map
+      class="bm-location__map"
       ng-style="{{$ctrl.style}}"
       center="{{$ctrl.center()}}"
       zoom="{{$ctrl.zoom}}"
@@ -509,8 +532,8 @@ mod.component('bmStaticLocationOnMap', {
   },
   controller: BmStaticLocationOnController,
   template: `
-  <figure>
-    <img ng-src="{{$ctrl.imgSrc()}}" alt="{{$ctrl.title()}}" height="{{$ctrl.height}}" width="{{$ctrl.height}}" />
+  <figure class="bm-location__map-container">
+    <img class="bm-location__map" ng-src="{{$ctrl.imgSrc()}}" alt="{{$ctrl.title()}}" height="{{$ctrl.height}}" width="{{$ctrl.height}}" />
   </figure>
 `
 })

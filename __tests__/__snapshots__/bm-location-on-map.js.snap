@@ -1,8 +1,8 @@
 exports[`test $rootScope.googleMapsApiKey, [coords] [ng-disabled] [ng-readonly] 1`] = `
 "
   <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\"$ctrl.ngDisabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
-  <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\" alt=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\">
+  <figure class=\"bm-location__map-container\">
+    <img class=\"bm-location__map\" ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\" alt=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
   <!-- ngIf: !$ctrl.ngDisabled -->
@@ -12,8 +12,8 @@ exports[`test $rootScope.googleMapsApiKey, [coords] [ng-disabled] [ng-readonly] 
 exports[`test $rootScope.googleMapsApiKey, [coords] [ng-disabled] 1`] = `
 "
   <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\"$ctrl.ngDisabled\" coords=\"$ctrl.coords\" class=\"ng-scope ng-isolate-scope\">
-  <figure>
-    <img ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\" alt=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\">
+  <figure class=\"bm-location__map-container\">
+    <img class=\"bm-location__map\" ng-src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\" alt=\"map with center at -35 latitude, 150 longitude\" height=\"300\" width=\"300\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\">
   </figure>
 </bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
   <!-- ngIf: !$ctrl.ngDisabled -->
@@ -23,20 +23,20 @@ exports[`test $rootScope.googleMapsApiKey, [coords] [ng-disabled] 1`] = `
 exports[`test $rootScope.googleMapsApiKey, [coords] [ng-readonly] 1`] = `
 "
   <!-- ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled --><figure ng-if=\"!$ctrl.ngDisabled\" map-lazy-load=\"https://maps.google.com/maps/api/js\" map-lazy-load-params=\"https://maps.google.com/maps/api/js?key=secret\" class=\"ng-scope\"></figure><!-- end ngIf: !$ctrl.ngDisabled -->
+  <!-- ngIf: !$ctrl.ngDisabled --><figure class=\"bm-location__map-container ng-scope\" ng-if=\"!$ctrl.ngDisabled\" map-lazy-load=\"https://maps.google.com/maps/api/js\" map-lazy-load-params=\"https://maps.google.com/maps/api/js?key=secret\"></figure><!-- end ngIf: !$ctrl.ngDisabled -->
 "
 `;
 
 exports[`test $rootScope.googleMapsApiKey, [coords] 1`] = `
 "
   <!-- ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled --><figure ng-if=\"!$ctrl.ngDisabled\" map-lazy-load=\"https://maps.google.com/maps/api/js\" map-lazy-load-params=\"https://maps.google.com/maps/api/js?key=secret\" class=\"ng-scope\"></figure><!-- end ngIf: !$ctrl.ngDisabled -->
+  <!-- ngIf: !$ctrl.ngDisabled --><figure class=\"bm-location__map-container ng-scope\" ng-if=\"!$ctrl.ngDisabled\" map-lazy-load=\"https://maps.google.com/maps/api/js\" map-lazy-load-params=\"https://maps.google.com/maps/api/js?key=secret\"></figure><!-- end ngIf: !$ctrl.ngDisabled -->
 "
 `;
 
 exports[`test no attributes 1`] = `
 "
   <!-- ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled --><figure ng-if=\"!$ctrl.ngDisabled\" map-lazy-load=\"https://maps.google.com/maps/api/js\" map-lazy-load-params=\"https://maps.google.com/maps/api/js?key=undefined\" class=\"ng-scope\"></figure><!-- end ngIf: !$ctrl.ngDisabled -->
+  <!-- ngIf: !$ctrl.ngDisabled --><figure class=\"bm-location__map-container ng-scope\" ng-if=\"!$ctrl.ngDisabled\" map-lazy-load=\"https://maps.google.com/maps/api/js\" map-lazy-load-params=\"https://maps.google.com/maps/api/js?key=undefined\"></figure><!-- end ngIf: !$ctrl.ngDisabled -->
 "
 `;
