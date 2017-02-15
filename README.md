@@ -10,6 +10,21 @@ Angular 1.x components for maps and geolocation
 
 You must define a "googleMapsApiKey" property on the `$rootScope` with your API key.
 
+```js
+(function () {
+  'use strict'
+
+  const mod = angular.module('app', [ 'bmLocation' ])
+
+  mod.run([
+    '$rootScope', // minification-safe dependency-injection
+    ($rootScope) => {
+      $rootScope.googleMapsApiKey = 'secret'
+    }
+  ])
+}())
+```
+
 
 ### bmStaticLocationOnMap
 
@@ -23,6 +38,12 @@ Attributes:
 -   height?: number | string
 -   width?: number | string
 -   zoom?: number | string
+
+```html
+<bm-static-location-on-map
+  coords='{"latitude":10,"longitude":10}'
+></bm-static-location-on-map>
+```
 
 
 ### bmLocationOnMap
@@ -46,6 +67,29 @@ Otherwise, the pin is interactive and the user may reposition it
 
 This features a 1-way data-binding design, so this component notifies the parent controller / component / scope when the pin's position changes
 
+```html
+<div ng-controller="MyController">
+  <bm-location-on-map
+    coords="coords"
+    on-change="onChange(value)"
+  ></bm-location-on-map>
+</div>
+```
+
+```js
+class MyController {
+  constructor () {
+    this.coords = { latitude: 10, longitude: 10 }
+  }
+  onChange (value) {
+    this.coords = value
+  }
+}
+mod.controller('MyController', MyController)
+```
+
+Note: in your HTML template, for your on-change handler, you must name the argument `value`
+
 
 ### bmConfirmLocationOnMap
 
@@ -59,9 +103,27 @@ Attributes:
 -   ngReadonly?: boolean | string
 -   ngModel?: [ngModel](https://docs.angularjs.org/api/ng/directive/ngModel)
 
-Field is interative when neither "ngDisabled" or "ngReadonly" are truthy
+Field is interactive when neither "ngDisabled" or "ngReadonly" are truthy
 
 This features a 2-way data-binding design via ngModel
+
+```html
+<div ng-controller="MyController">
+  <bm-confirm-location-on-map
+    ng-model="coords"
+  ></bm-confirm-location-on-map>
+</div>
+```
+
+```js
+class MyController {
+  constructor ($scope) {
+    $scope.coords = { latitude: 10, longitude: 10 }
+  }
+}
+MyController.$inject = [ '$scope' ] // minification-safe dependency-injection
+mod.controller('MyController', MyController)
+```
 
 
 ## Testing
