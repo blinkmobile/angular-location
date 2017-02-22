@@ -252,6 +252,7 @@ class BmConfirmLocationOnMapController {
   }
 }
 
+// minification-safe dependency-injection
 BmConfirmLocationOnMapController.$inject = [ '$scope' ]
 
 mod.component('bmConfirmLocationOnMap', {
@@ -273,33 +274,33 @@ mod.component('bmConfirmLocationOnMap', {
     ></bm-location-on-map>
 
     <div
-      class="bm-location__button-container"
+      class="bm-button-container bm-location__button-container"
       ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"
     >
 
       <button type="button"
-        class="bm-location__button bm-location__button-cancel"
+        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"
         ng-if="$ctrl.isEditing"
         ng-click="$ctrl.onCancel()"
       >Cancel</button>
       <button type="button"
-        class="bm-location__button bm-location__button-findme"
+        class="bm-button bm-button-findme bm-location__button bm-location__button-findme"
         ng-if="$ctrl.isEditing"
         ng-click="$ctrl.onFindMe()"
       >Find Me</button>
       <button type="button"
-        class="bm-location__button bm-location__button-confirm"
+        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"
         ng-if="$ctrl.isEditing"
         ng-click="$ctrl.onConfirm()"
       >Confirm</button>
 
       <button type="button"
-        class="bm-location__button bm-location__button-clear"
+        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"
         ng-if="!$ctrl.isEditing"
         ng-click="$ctrl.onClear()"
       >Clear</button>
       <button type="button"
-        class="bm-location__button bm-location__button-edit"
+        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"
         ng-if="!$ctrl.isEditing"
         ng-click="$ctrl.onEdit()"
       >Edit
@@ -401,6 +402,8 @@ class BmLocationOnMapController {
     }
   }
 }
+
+// minification-safe dependency-injection
 BmLocationOnMapController.$inject = [ '$rootScope' ]
 
 mod.component('bmLocationOnMap', {
@@ -530,6 +533,8 @@ class BmStaticLocationOnController {
     return `map with center at ${this.coords.latitude} latitude, ${this.coords.longitude} longitude`
   }
 }
+
+// minification-safe dependency-injection
 BmStaticLocationOnController.$inject = [ '$rootScope' ]
 
 mod.component('bmStaticLocationOnMap', {
