@@ -173,7 +173,7 @@ class BmConfirmLocationOnMapController {
 
   // internal use
 
-  /* :: $digest: () => void */
+  /* :: $apply: () => () => void */
   /* :: coords: ?Coordinates */
   /* :: isEditing: boolean */
 
@@ -184,12 +184,20 @@ class BmConfirmLocationOnMapController {
   /* :: ngReadonly: boolean */
 
   constructor ($scope /* : Object */) {
-    this.$digest = $scope.$digest.bind($scope)
+    this.$apply = $scope.$apply.bind($scope)
     this.coords = null
     this.isEditing = false
   }
 
-  $onInit () {}
+  $onInit () {
+    this.ngModel.$render = () => {
+      this.coords = this.ngModel.$viewValue
+    }
+  }
+
+  $onDestroy () {
+    delete this.ngModel.$render
+  }
 
   $onChanges () {
     this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
@@ -219,13 +227,14 @@ class BmConfirmLocationOnMapController {
   onFindMe () {
     geolocation.getCurrentPosition()
       .then((position) => {
-        if (position.coords) {
-          const { latitude = 0, longitude = 0 } = position.coords || {}
-          this.coords = { latitude, longitude }
-        } else {
-          this.coords = null
-        }
-        this.$digest()
+        this.$apply(() => {
+          if (position.coords) {
+            const { latitude = 0, longitude = 0 } = position.coords || {}
+            this.coords = { latitude, longitude }
+          } else {
+            this.coords = null
+          }
+        })
       })
       .catch((err /* : Error */) => {
         /* eslint-disable no-console */ // useful for debugging

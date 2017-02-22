@@ -108,20 +108,19 @@ Field is interactive when neither "ngDisabled" or "ngReadonly" are truthy
 This features a 2-way data-binding design via ngModel
 
 ```html
-<div ng-controller="MyController">
+<div ng-controller="MyController as $ctrl">
   <bm-confirm-location-on-map
-    ng-model="coords"
+    ng-model="$ctrl.coords"
   ></bm-confirm-location-on-map>
 </div>
 ```
 
 ```js
 class MyController {
-  constructor ($scope) {
-    $scope.coords = { latitude: 10, longitude: 10 }
+  constructor () {
+    this.coords = { latitude: 10, longitude: 10 }
   }
 }
-MyController.$inject = [ '$scope' ] // minification-safe dependency-injection
 mod.controller('MyController', MyController)
 ```
 

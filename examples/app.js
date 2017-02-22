@@ -15,10 +15,13 @@
     }
   ])
 
-  mod.controller('BmLocationOnMapDemoController', [
-    '$scope',
-    function BmLocationOnMapDemoController ($scope) {
-      $scope.demo = {
+  class BmLocationOnMapDemoController {
+    // public attributes
+
+    /* :: demo: Object */
+
+    constructor () {
+      this.demo = {
         coords: {
           latitude: -30,
           longitude: 140
@@ -26,10 +29,12 @@
         disabled: null,
         readonly: null
       }
-
-      $scope.onChange = function (newCoords) {
-        $scope.demo.coords = newCoords
-      }
     }
-  ])
+
+    onChange (newCoords) {
+      this.demo.coords = newCoords
+    }
+  }
+
+  mod.controller('BmLocationOnMapDemoController', BmLocationOnMapDemoController)
 }())

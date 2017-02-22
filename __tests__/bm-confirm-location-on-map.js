@@ -96,12 +96,12 @@ test('$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly]', () =>
 })
 
 test('controller constructor', () => {
-  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $apply: () => {} })
   expect(ctrl).toBeDefined()
 })
 
 test('onEdit() does not trigger geolocation if coords is set', () => {
-  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $apply: () => {} })
   const { getCurrentPosition } = require('@blinkmobile/geolocation')
 
   ctrl.onChange({ latitude: 10, longitude: 10 })
@@ -111,7 +111,7 @@ test('onEdit() does not trigger geolocation if coords is set', () => {
 })
 
 test('onEdit() does trigger geolocation if coords is set', () => {
-  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $apply: () => {} })
   const { getCurrentPosition } = require('@blinkmobile/geolocation')
 
   ctrl.onChange(null)
@@ -121,7 +121,7 @@ test('onEdit() does trigger geolocation if coords is set', () => {
 })
 
 test('$onChanges correctly copies coords', () => {
-  const ctrl = new mod.BmConfirmLocationOnMapController({ $digest: () => {} })
+  const ctrl = new mod.BmConfirmLocationOnMapController({ $apply: () => {} })
 
   const FAKE_COORDS = { latitude: 20, longitude: 20 }
   ctrl.ngModel = Object.assign(fakes.fakeNgModel(), { $viewValue: FAKE_COORDS })
