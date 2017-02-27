@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`$rootScope.googleMapsApiKey, [coords], [height], [width], [zoom] 1`] = `
+"
+  <figure class=\\"bm-location__map-container\\">
+    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=200x200&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\\" alt=\\"map with center at -35 latitude, 150 longitude\\" height=\\"200\\" width=\\"200\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=200x200&amp;zoom=10&amp;center=-35%2C150&amp;markers=color%3Ared%7C-35%2C150\\">
+  </figure>
+"
+`;
+
+exports[`invalid [coords] 1`] = `
+"
+  <figure class=\\"bm-location__map-container\\">
+    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\" alt=\\"map of unspecified location\\" height=\\"300\\" width=\\"300\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\">
+  </figure>
+"
+`;
+
+exports[`no attributes 1`] = `
+"
+  <figure class=\\"bm-location__map-container\\">
+    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=undefined&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\" alt=\\"map of unspecified location\\" height=\\"300\\" width=\\"300\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=undefined&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\">
+  </figure>
+"
+`;
