@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -32,9 +32,6 @@
 /******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
 /******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
@@ -63,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -74,12 +71,11 @@
 /* @flow */
 
 
-const ng = __webpack_require__(3)
+var ng = __webpack_require__(2);
 
-__webpack_require__(8)
+__webpack_require__(7);
 
-module.exports = ng.module('bmLocation', [ 'ngMap' ])
-
+module.exports = ng.module('bmLocation', ['ngMap']);
 
 /***/ }),
 /* 1 */
@@ -89,67 +85,65 @@ module.exports = ng.module('bmLocation', [ 'ngMap' ])
 /* @flow */
 
 
-function isCoordsValid (coords /* : any */) {
+function isCoordsValid(coords /* : any */) {
   if (!coords) {
-    return false
+    return false;
   }
-  const latitude = Number(coords.latitude)
-  const longitude = Number(coords.longitude)
-  return !isNaN(latitude) && !isNaN(longitude)
+  var latitude = Number(coords.latitude);
+  var longitude = Number(coords.longitude);
+  return !isNaN(latitude) && !isNaN(longitude);
 }
 
-function parseBooleanAttribute (value /* : any */) {
+function parseBooleanAttribute(value /* : any */) {
   if (!value || value === 'false') {
-    return false
+    return false;
   }
-  return true
+  return true;
 }
 
-function parseCoords (coords /* : string | ?Object | void */) /* : Object */ {
+function parseCoords(coords /* : string | ?Object | void */) /* : Object */{
   if (!coords) {
-    return {}
+    return {};
   }
   if (typeof coords === 'string') {
     try {
-      coords = JSON.parse(coords)
+      coords = JSON.parse(coords);
     } catch (err) {
-      coords = {}
+      coords = {};
     }
   }
-  return coords
+  return coords;
 }
 
 module.exports = {
-  isCoordsValid,
-  parseBooleanAttribute,
-  parseCoords
-}
-
+  isCoordsValid: isCoordsValid,
+  parseBooleanAttribute: parseBooleanAttribute,
+  parseCoords: parseCoords
+};
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = angular;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* @flow */
 
 
-const DEFAULT_ATTRS = {
+var DEFAULT_ATTRS = {
   height: 300,
   width: 300,
   zoom: 10
-}
+};
 
 module.exports = {
-  DEFAULT_ATTRS
-}
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = angular;
+  DEFAULT_ATTRS: DEFAULT_ATTRS
+};
 
 /***/ }),
 /* 4 */
@@ -159,16 +153,32 @@ module.exports = angular;
 /* @flow */
 
 
-const geolocation = __webpack_require__(7)
+__webpack_require__(5);
+__webpack_require__(8);
+__webpack_require__(9);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* @flow */
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var geolocation = __webpack_require__(6);
 
 /* :: import type {
   AngularCallbackOptions, Coordinates, NgModelController
 } from '../../types.js' */
 
-const mod = __webpack_require__(0)
-const utils = __webpack_require__(1)
+var mod = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
-class BmConfirmLocationOnMapController {
+var BmConfirmLocationOnMapController = function () {
   /* :: static $inject : string[] */
 
   // internal use
@@ -183,77 +193,101 @@ class BmConfirmLocationOnMapController {
   /* :: ngModel: NgModelController */
   /* :: ngReadonly: boolean */
 
-  constructor ($scope /* : Object */) {
-    this.$apply = $scope.$apply.bind($scope)
-    this.coords = null
-    this.isEditing = false
+  function BmConfirmLocationOnMapController($scope /* : Object */) {
+    _classCallCheck(this, BmConfirmLocationOnMapController);
+
+    this.$apply = $scope.$apply.bind($scope);
+    this.coords = null;
+    this.isEditing = false;
   }
 
-  $onInit () {
-    this.ngModel.$render = () => {
-      this.coords = this.ngModel.$viewValue
+  _createClass(BmConfirmLocationOnMapController, [{
+    key: '$onInit',
+    value: function $onInit() {
+      var _this = this;
+
+      this.ngModel.$render = function () {
+        _this.coords = _this.ngModel.$viewValue;
+      };
     }
-  }
+  }, {
+    key: '$onDestroy',
+    value: function $onDestroy() {
+      delete this.ngModel.$render;
+    }
+  }, {
+    key: '$onChanges',
+    value: function $onChanges() {
+      this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled);
+      this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly);
+      this.coords = this.ngModel.$viewValue;
+    }
+  }, {
+    key: 'onCancel',
+    value: function onCancel(event /* : Event */) {
+      this.coords = this.ngModel.$viewValue;
+      this.isEditing = false;
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange(value /* : ?Coordinates */) {
+      this.coords = value;
+    }
+  }, {
+    key: 'onClear',
+    value: function onClear(event /* : Event */) {
+      this.coords = null;
+      this.ngModel.$setViewValue(this.coords, event);
+    }
+  }, {
+    key: 'onConfirm',
+    value: function onConfirm(event /* : Event */) {
+      this.isEditing = false;
+      this.ngModel.$setViewValue(this.coords, event);
+    }
+  }, {
+    key: 'onFindMe',
+    value: function onFindMe() {
+      var _this2 = this;
 
-  $onDestroy () {
-    delete this.ngModel.$render
-  }
-
-  $onChanges () {
-    this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
-    this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly)
-    this.coords = this.ngModel.$viewValue
-  }
-
-  onCancel (event /* : Event */) {
-    this.coords = this.ngModel.$viewValue
-    this.isEditing = false
-  }
-
-  onChange (value /* : ?Coordinates */) {
-    this.coords = value
-  }
-
-  onClear (event /* : Event */) {
-    this.coords = null
-    this.ngModel.$setViewValue(this.coords, event)
-  }
-
-  onConfirm (event /* : Event */) {
-    this.isEditing = false
-    this.ngModel.$setViewValue(this.coords, event)
-  }
-
-  onFindMe () {
-    geolocation.getCurrentPosition()
-      .then((position) => {
-        this.$apply(() => {
+      geolocation.getCurrentPosition().then(function (position) {
+        _this2.$apply(function () {
           if (position.coords) {
-            const { latitude = 0, longitude = 0 } = position.coords || {}
-            this.coords = { latitude, longitude }
-          } else {
-            this.coords = null
-          }
-        })
-      })
-      .catch((err /* : Error */) => {
-        /* eslint-disable no-console */ // useful for debugging
-        console.error('geolocation.getCurrentPosition()', err)
-        /* eslint-enable no-console */
-        this.coords = null
-      })
-  }
+            var _ref = position.coords || {},
+                _ref$latitude = _ref.latitude,
+                latitude = _ref$latitude === undefined ? 0 : _ref$latitude,
+                _ref$longitude = _ref.longitude,
+                longitude = _ref$longitude === undefined ? 0 : _ref$longitude;
 
-  onEdit () {
-    this.isEditing = true
-    if (!this.coords) {
-      this.onFindMe()
+            _this2.coords = { latitude: latitude, longitude: longitude };
+          } else {
+            _this2.coords = null;
+          }
+        });
+      }).catch(function (err /* : Error */) {
+        /* eslint-disable no-console */ // useful for debugging
+        console.error('geolocation.getCurrentPosition()', err);
+        /* eslint-enable no-console */
+        _this2.coords = null;
+      });
     }
-  }
-}
+  }, {
+    key: 'onEdit',
+    value: function onEdit() {
+      this.isEditing = true;
+      if (!this.coords) {
+        this.onFindMe();
+      }
+    }
+  }]);
+
+  return BmConfirmLocationOnMapController;
+}();
 
 // minification-safe dependency-injection
-BmConfirmLocationOnMapController.$inject = [ '$scope' ]
+
+
+BmConfirmLocationOnMapController.$inject = ['$scope'];
 
 mod.component('bmConfirmLocationOnMap', {
   bindings: {
@@ -264,301 +298,15 @@ mod.component('bmConfirmLocationOnMap', {
   require: {
     ngModel: 'ngModel'
   },
-  template: `
-  <div class="bm-location">
-    <bm-location-on-map
-      coords="$ctrl.coords"
-      ng-disabled="{{!$ctrl.isEditing}}"
-      ng-readonly="{{$ctrl.ngReadonly}}"
-      on-change="$ctrl.onChange(value)"
-    ></bm-location-on-map>
-
-    <div
-      class="bm-button-container bm-location__button-container"
-      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"
-    >
-
-      <button type="button"
-        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"
-        ng-if="$ctrl.isEditing"
-        ng-click="$ctrl.onCancel()"
-      >Cancel</button>
-      <button type="button"
-        class="bm-button bm-button-findme bm-location__button bm-location__button-findme"
-        ng-if="$ctrl.isEditing"
-        ng-click="$ctrl.onFindMe()"
-      >Find Me</button>
-      <button type="button"
-        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"
-        ng-if="$ctrl.isEditing"
-        ng-click="$ctrl.onConfirm()"
-      >Confirm</button>
-
-      <button type="button"
-        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"
-        ng-if="!$ctrl.isEditing"
-        ng-click="$ctrl.onClear()"
-      >Clear</button>
-      <button type="button"
-        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"
-        ng-if="!$ctrl.isEditing"
-        ng-click="$ctrl.onEdit()"
-      >Edit
-      </button>
-
-    </div>
-  </div>
-`
-})
+  template: '\n  <div class="bm-location">\n    <bm-location-on-map\n      coords="$ctrl.coords"\n      ng-disabled="{{!$ctrl.isEditing}}"\n      ng-readonly="{{$ctrl.ngReadonly}}"\n      on-change="$ctrl.onChange(value)"\n    ></bm-location-on-map>\n\n    <div\n      class="bm-button-container bm-location__button-container"\n      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"\n    >\n\n      <button type="button"\n        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onCancel()"\n      >Cancel</button>\n      <button type="button"\n        class="bm-button bm-button-findme bm-location__button bm-location__button-findme"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onFindMe()"\n      >Find Me</button>\n      <button type="button"\n        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onConfirm()"\n      >Confirm</button>\n\n      <button type="button"\n        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onClear()"\n      >Clear</button>\n      <button type="button"\n        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onEdit()"\n      >Edit\n      </button>\n\n    </div>\n  </div>\n'
+});
 
 module.exports = {
-  BmConfirmLocationOnMapController
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* @flow */
-
-
-/* :: import type {
-  AngularCallback, Coordinates, GoogleMapsMouseEvent
-} from '../../types.js' */
-
-const mod = __webpack_require__(0)
-const utils = __webpack_require__(1)
-const DEFAULT_ATTRS = __webpack_require__(2).DEFAULT_ATTRS
-
-const JS_URL = 'https://maps.google.com/maps/api/js'
-
-class BmLocationOnMapController {
-  /* :: static $inject: string[] */
-
-  // internal use
-
-  /* :: googleMapsUrl: string */
-  /* :: onDragEnd: (event: Object) => void */
-  /* :: style: Object */
-
-  // public attributes (after casts / checks)
-
-  /* :: coords: Coordinates */
-  /* :: height: number */
-  /* :: ngDisabled: boolean */
-  /* :: ngReadonly: boolean */
-  /* :: onChange: AngularCallback */
-  /* :: width: number */
-  /* :: zoom: number */
-
-  constructor ($rootScope /* : Object */) {
-    Object.assign(this, {
-      googleMapsUrl: `${JS_URL}?key=${$rootScope.googleMapsApiKey}`
-    }, DEFAULT_ATTRS)
-
-    this.onDragEnd = this.onDragEnd.bind(this) // take back from ngMap marker
-  }
-
-  $onInit () {}
-
-  $onDestroy () {}
-
-  $onChanges () {
-    this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled)
-    this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly)
-
-    this.height = Number(this.height) || DEFAULT_ATTRS.height
-    this.width = Number(this.width) || DEFAULT_ATTRS.width
-    this.zoom = Number(this.zoom) || DEFAULT_ATTRS.zoom
-
-    this.coords = utils.parseCoords(this.coords)
-
-    this.style = {
-      height: this.height,
-      width: this.width
-    }
-  }
-
-  center () {
-    if (utils.isCoordsValid(this.coords)) {
-      return [ this.coords.latitude, this.coords.longitude ]
-    }
-    return [ 0, 0 ]
-  }
-
-  // for an explanation of `this.onChange({ value: { /* ... */ } })`
-  // see: http://www.codelord.net/2016/05/13/understanding-angulars-and-binding/
-
-  onDragEnd (event /* : GoogleMapsMouseEvent */) {
-    if (typeof this.onChange === 'function') {
-      this.onChange({
-        value: {
-          latitude: event.latLng.lat(),
-          longitude: event.latLng.lng()
-        }
-      })
-    }
-  }
-}
-
-// minification-safe dependency-injection
-BmLocationOnMapController.$inject = [ '$rootScope' ]
-
-mod.component('bmLocationOnMap', {
-  bindings: {
-    coords: '<?',
-    height: '@?',
-    ngDisabled: '@?',
-    ngReadonly: '@?',
-    onChange: '&?',
-    width: '@?',
-    zoom: '@?'
-  },
-  controller: BmLocationOnMapController,
-  template: `
-  <bm-static-location-on-map
-    ng-if="$ctrl.ngDisabled"
-    coords="$ctrl.coords"
-  ></bm-static-location-on-map>
-  <figure
-    class="bm-location__map-container"
-    ng-if="!$ctrl.ngDisabled"
-    map-lazy-load="https://maps.google.com/maps/api/js"
-    map-lazy-load-params="{{$ctrl.googleMapsUrl}}"
-  >
-    <ng-map
-      class="bm-location__map"
-      ng-style="{{$ctrl.style}}"
-      center="{{$ctrl.center()}}"
-      zoom="{{$ctrl.zoom}}"
-    >
-      <marker
-        animation="Animation.DROP"
-        draggable="{{!$ctrl.ngReadonly}}"
-        on-dragend="$ctrl.onDragEnd()"
-        position="{{$ctrl.center()}}"
-      ></marker>
-    </ng-map>
-  </figure>
-`
-})
-
-module.exports = {
-  BmLocationOnMapController
-}
-
+  BmConfirmLocationOnMapController: BmConfirmLocationOnMapController
+};
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* @flow */
-
-
-const querystring = __webpack_require__(11)
-
-/* :: import type { Coordinates } from '../../types.js' */
-
-const mod = __webpack_require__(0)
-const utils = __webpack_require__(1)
-const DEFAULT_ATTRS = __webpack_require__(2).DEFAULT_ATTRS
-
-const API_URL = 'https://maps.googleapis.com/maps/api/staticmap'
-
-class BmStaticLocationOnController {
-  /* :: static $inject : string[] */
-
-  // internal use
-
-  /* :: googleMapsUrl: string */
-
-  // public attributes (after casts)
-
-  /* :: coords: Coordinates */
-  /* :: height: number */
-  /* :: width: number */
-  /* :: zoom: number */
-
-  constructor ($rootScope /* : Object */) {
-    Object.assign(this, {
-      googleMapsUrl: `${API_URL}?key=${$rootScope.googleMapsApiKey}`
-    }, DEFAULT_ATTRS)
-  }
-
-  $onInit () {}
-
-  $onDestroy () {}
-
-  $onChanges () {
-    this.height = this.height || DEFAULT_ATTRS.height
-    this.width = this.width || DEFAULT_ATTRS.width
-    this.zoom = Number(this.zoom) || DEFAULT_ATTRS.zoom
-
-    this.coords = utils.parseCoords(this.coords)
-  }
-
-  isValid () {
-    return utils.isCoordsValid(this.coords)
-  }
-
-  imgSrc () {
-    const options = {
-      scale: 2, // retina
-      size: `${this.width}x${this.height}`,
-      zoom: this.zoom
-    }
-
-    if (!this.isValid()) {
-      const qsa = querystring.stringify(Object.assign({}, options, {
-        center: '0,0',
-        zoom: 0
-      }))
-      return `${this.googleMapsUrl}&${qsa}`
-    }
-
-    const qsa = querystring.stringify(Object.assign({}, options, {
-      center: `${this.coords.latitude},${this.coords.longitude}`,
-      markers: `color:red|${this.coords.latitude},${this.coords.longitude}`
-    }))
-    return `${this.googleMapsUrl}&${qsa}`
-  }
-
-  title () {
-    if (!this.isValid()) {
-      return 'map of unspecified location'
-    }
-    return `map with center at ${this.coords.latitude} latitude, ${this.coords.longitude} longitude`
-  }
-}
-
-// minification-safe dependency-injection
-BmStaticLocationOnController.$inject = [ '$rootScope' ]
-
-mod.component('bmStaticLocationOnMap', {
-  bindings: {
-    coords: '<?',
-    height: '@?',
-    width: '@?',
-    zoom: '@?'
-  },
-  controller: BmStaticLocationOnController,
-  template: `
-  <figure class="bm-location__map-container">
-    <img class="bm-location__map" ng-src="{{$ctrl.imgSrc()}}" alt="{{$ctrl.title()}}" height="{{$ctrl.height}}" width="{{$ctrl.height}}" />
-  </figure>
-`
-})
-
-module.exports = {
-  BmStaticLocationOnController
-}
-
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -569,7 +317,7 @@ module.exports = {
   GeolocationDriver, PositionLike, PositionOptionsLike
 } from './types.js' */
 
-const DEFAULT_POSITION_OPTIONS /* : PositionOptions */ = {
+var DEFAULT_POSITION_OPTIONS /* : PositionOptions */ = {
   enableHighAccuracy: true,
   maximumAge: 0, // fresh results each time
   timeout: 10 * 1000 // take no longer than 10 seconds
@@ -577,7 +325,7 @@ const DEFAULT_POSITION_OPTIONS /* : PositionOptions */ = {
 
 function clonePosition (position /* : PositionLike */) /* : PositionLike */ {
   position = position || {}
-  let coords = position.coords || {}
+  var coords = position.coords || {}
   if (typeof position !== 'object' || typeof coords !== 'object') {
     throw new TypeError('cannot clone non-Position object')
   }
@@ -612,9 +360,9 @@ function mergePositionOptions (
   }
 }
 
-const DRIVERS_PREFERENCE = [ 'W3C' ]
+var DRIVERS_PREFERENCE = ['W3C']
 
-const DRIVERS /* : { [id:string]: GeolocationDriver } */ = {
+var DRIVERS /* : { [id:string]: GeolocationDriver } */ = {
 
   W3C: {
     isAvailable: function () /* : boolean */ {
@@ -630,7 +378,7 @@ const DRIVERS /* : { [id:string]: GeolocationDriver } */ = {
       onError /* : (error: PositionError) => any */,
       options /* : PositionOptions */
     ) /* : void */ {
-      navigator.geolocation.getCurrentPosition(position => {
+      navigator.geolocation.getCurrentPosition(function (position) {
         onSuccess(clonePosition(position))
       }, onError, options)
     }
@@ -639,23 +387,23 @@ const DRIVERS /* : { [id:string]: GeolocationDriver } */ = {
 }
 
 function detectDriver () /* : GeolocationDriver | false */ {
-  const availableDriver = DRIVERS_PREFERENCE
-    .map((name) => DRIVERS[name])
-    .find((driver) => driver.isAvailable())
+  var availableDriver = DRIVERS_PREFERENCE
+    .map(function (name) { return DRIVERS[name] })
+    .find(function (driver) { return driver.isAvailable() })
   return availableDriver || false
 }
 
 function getCurrentPosition (
   options /* :? PositionOptionsLike */
 ) /* : Promise<PositionLike> */ {
-  const driver = detectDriver()
+  var driver = detectDriver()
   if (!driver) {
     return Promise.reject(new Error('GeoLocation not supported'))
   }
-  return new Promise((resolve, reject) => {
-    driver.getCurrentPosition(position => {
+  return new Promise(function (resolve, reject) {
+    driver.getCurrentPosition(function (position) {
       resolve(position)
-    }, err => {
+    }, function (err) {
       reject(err)
     }, mergePositionOptions(options))
   })
@@ -671,12 +419,12 @@ module.exports = {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function(root, factory) {
 if (true) {
-module.exports = factory(__webpack_require__(3));
+module.exports = factory(__webpack_require__(2));
 } else if (typeof define === "function" && define.amd) {
 define(['angular'], factory);
 } else{
@@ -684,7 +432,7 @@ factory(root.angular);
 }
 }(this, function(angular) {
 /**
- * AngularJS Google Maps Ver. 1.18.0
+ * AngularJS Google Maps Ver. 1.18.3
  *
  * The MIT License (MIT)
  * 
@@ -1007,7 +755,7 @@ angular.module('ngMap', []);
  * @ngdoc directive
  * @name bicycling-layer
  * @param Attr2Options {service}
- *   convert html attribute to Gogole map api options
+ *   convert html attribute to Google map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -1063,7 +811,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name custom-control
- * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param Attr2Options {service} convert html attribute to Google map api options
  * @param $compile {service} AngularJS $compile service
  * @description
  *   Build custom control and set to the map with position
@@ -1089,9 +837,9 @@ angular.module('ngMap', []);
  */
 (function() {
   'use strict';
-  var parser, $compile, NgMap;
+  var parser, NgMap;
 
-  var linkFunc = function(scope, element, attrs, mapController) {
+  var linkFunc = function(scope, element, attrs, mapController, $transclude) {
     mapController = mapController[0]||mapController[1];
     var filtered = parser.filter(attrs);
     var options = parser.getOptions(filtered, {scope: scope});
@@ -1101,7 +849,8 @@ angular.module('ngMap', []);
      * build a custom control element
      */
     var customControlEl = element[0].parentElement.removeChild(element[0]);
-    $compile(customControlEl.innerHTML.trim())(scope);
+    var content = $transclude();
+    angular.element(customControlEl).append(content);
 
     /**
      * set events
@@ -1119,16 +868,17 @@ angular.module('ngMap', []);
     });
   };
 
-  var customControl =  function(Attr2MapOptions, _$compile_, _NgMap_)  {
-    parser = Attr2MapOptions, $compile = _$compile_, NgMap = _NgMap_;
+  var customControl =  function(Attr2MapOptions, _NgMap_)  {
+    parser = Attr2MapOptions, NgMap = _NgMap_;
 
     return {
       restrict: 'E',
       require: ['?^map','?^ngMap'],
-      link: linkFunc
+      link: linkFunc,
+      transclude: true
     }; // return
   };
-  customControl.$inject = ['Attr2MapOptions', '$compile', 'NgMap'];
+  customControl.$inject = ['Attr2MapOptions', 'NgMap'];
 
   angular.module('ngMap').directive('customControl', customControl);
 })();
@@ -1137,7 +887,7 @@ angular.module('ngMap', []);
  * @ngdoc directive
  * @memberof ngmap
  * @name custom-marker
- * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param Attr2Options {service} convert html attribute to Google map api options
  * @param $timeout {service} AngularJS $timeout
  * @description
  *   Marker with html
@@ -1522,7 +1272,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name drawing-manager
- * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param Attr2Options {service} convert html attribute to Google map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -1710,7 +1460,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name heatmap-layer
- * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param Attr2Options {service} convert html attribute to Google map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -1764,7 +1514,7 @@ angular.module('ngMap', []);
  * @ngdoc directive
  * @name info-window
  * @param Attr2MapOptions {service}
- *   convert html attribute to Gogole map api options
+ *   convert html attribute to Google map api options
  * @param $compile {service} $compile service
  * @description
  *  Defines infoWindow and provides compile method
@@ -1916,14 +1666,15 @@ angular.module('ngMap', []);
           var marker = typeof p1 == 'string' ? p2 : p3;
           if (typeof marker == 'string') {
             //Check if markers if defined to avoid odd 'undefined' errors
-            if (typeof mapController.map.markers != "undefined"
-                && typeof mapController.map.markers[marker] != "undefined") {
-              marker = mapController.map.markers[marker];
+            if (
+              typeof mapController.map.markers != "undefined"
+              && typeof mapController.map.markers[marker] != "undefined") {
+                marker = mapController.map.markers[marker];
             } else if (
-                //additionally check if that marker is a custom marker
-            typeof mapController.map.customMarkers
-            && typeof mapController.map.customMarkers[marker] != "undefined") {
-              marker = mapController.map.customMarkers[marker];
+              //additionally check if that marker is a custom marker
+              typeof mapController.map.customMarkers !== "undefined"
+              && typeof mapController.map.customMarkers[marker] !== "undefined") {
+                marker = mapController.map.customMarkers[marker];
             } else {
               //Better error output if marker with that id is not defined
               throw new Error("Cant open info window for id " + marker + ". Marker or CustomMarker is not defined")
@@ -1980,7 +1731,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name kml-layer
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @description
  *   renders Kml layer on a map
  *   Requires:  map directive
@@ -2047,7 +1798,7 @@ angular.module('ngMap', []);
  * @ngdoc directive
  * @name map-data
  * @param Attr2MapOptions {service}
- *   convert html attribute to Gogole map api options
+ *   convert html attribute to Google map api options
  * @description
  *   set map data
  *   Requires:  map directive
@@ -2071,13 +1822,14 @@ angular.module('ngMap', []);
       restrict: 'E',
       require: ['?^map','?^ngMap'],
 
-      link: function(scope, element, attrs) {
+      link: function(scope, element, attrs, mapController) {
+        mapController = mapController[0] || mapController[1];
         var filtered = parser.filter(attrs);
         var options = parser.getOptions(filtered, {scope: scope});
         var events = parser.getEvents(scope, filtered, events);
 
         void 0;
-        NgMap.getMap().then(function(map) {
+        NgMap.getMap(mapController.map.id).then(function(map) {
           //options
           for (var key in options) {
             var val = options[key];
@@ -2101,7 +1853,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name map-lazy-load
- * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param Attr2Options {service} convert html attribute to Google map api options
  * @description
  *  Requires: Delay the initialization of map directive
  *    until the map is ready to be rendered
@@ -2257,7 +2009,7 @@ angular.module('ngMap', []);
  * @memberof ngMap
  * @name ng-map
  * @param Attr2Options {service}
- *  convert html attribute to Gogole map api options
+ *  convert html attribute to Google map api options
  * @description
  * Implementation of {@link __MapController}
  * Initialize a Google map within a `<div>` tag
@@ -2372,7 +2124,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name marker
- * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param Attr2Options {service} convert html attribute to Google map api options
  * @param NavigatorGeolocation It is used to find the current location
  * @description
  *  Draw a Google map marker on a map with given options and register events
@@ -2500,7 +2252,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name overlay-map-type
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @param $window {service}
  * @description
  *   Requires:  map directive
@@ -2546,7 +2298,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name places-auto-complete
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @description
  *   Provides address auto complete feature to an input element
  *   Requires: input tag
@@ -2615,7 +2367,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name shape
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @description
  *   Initialize a Google map shape in map with given options and register events
  *   The shapes are:
@@ -2786,7 +2538,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name streetview-panorama
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -2883,7 +2635,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name traffic-layer
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -2937,7 +2689,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name transit-layer
- * @param Attr2MapOptions {service} convert html attribute to Gogole map api options
+ * @param Attr2MapOptions {service} convert html attribute to Google map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -3061,7 +2813,8 @@ angular.module('ngMap', []);
             function(_, $1) {
               return '"'+$1+'"';
             }
-          );
+          )
+          .replace(/''/g, '""');
       }
     };
   };
@@ -3518,6 +3271,68 @@ angular.module('ngMap', []);
 
 /**
  * @ngdoc service
+ * @name GoogleMapsApi
+ * @description
+ *   Load Google Maps API Service
+ */
+(function() {
+  'use strict';
+  var $q;
+  var $timeout;
+
+  var GoogleMapsApi = function(_$q_, _$timeout_) {
+    $q = _$q_;
+    $timeout = _$timeout_;
+
+    return {
+
+      /**
+       * Load google maps into document by creating a script tag
+       * @memberof GoogleMapsApi
+       * @param {string} mapsUrl
+       * @example
+       *   GoogleMapsApi.load(myUrl).then(function() {
+       *     console.log('google map has been loaded')
+       *   });
+       */
+      load: function (mapsUrl) {
+
+        var deferred = $q.defer();
+
+        if (window.google === undefined || window.google.maps === undefined) {
+
+          window.lazyLoadCallback = function() {
+            $timeout(function() { /* give some time to load */
+              deferred.resolve(window.google)
+            }, 100);
+          };
+
+          var scriptEl = document.createElement('script');
+          scriptEl.src = mapsUrl +
+            (mapsUrl.indexOf('?') > -1 ? '&' : '?') +
+            'callback=lazyLoadCallback';
+
+          if (!document.querySelector('script[src="' + scriptEl.src + '"]')) {
+            document.body.appendChild(scriptEl);
+          }
+        } else {
+          deferred.resolve(window.google)
+        }
+
+        return deferred.promise;
+      }
+
+    }
+  }
+  GoogleMapsApi.$inject = ['$q', '$timeout'];
+
+  angular.module('ngMap').service('GoogleMapsApi', GoogleMapsApi);
+})();
+
+
+
+/**
+ * @ngdoc service
  * @name NavigatorGeolocation
  * @description
  *  Provides [defered/promise API](https://docs.angularjs.org/api/ng/service/$q)
@@ -3761,16 +3576,20 @@ angular.module('ngMap', []);
    * @param {String} optional, id e.g., 'foo'
    * @returns promise
    */
-  var getMap = function(id) {
+  var getMap = function(id, options) {
+    options = options || {};
     id = typeof id === 'object' ? id.id : id;
-    id = id || 0;
 
     var deferred = $q.defer();
-    var timeout = 2000;
+    var timeout = options.timeout || 10000;
 
     function waitForMap(timeElapsed){
-      if(mapControllers[id]){
+      var keys = Object.keys(mapControllers);
+      var theFirstController = mapControllers[keys[0]];
+      if(id && mapControllers[id]){
         deferred.resolve(mapControllers[id].map);
+      } else if (!id && theFirstController && theFirstController.map) {
+        deferred.resolve(theFirstController.map);
       } else if (timeElapsed > timeout) {
         deferred.reject('could not find map');
       } else {
@@ -4054,7 +3873,264 @@ return 'ngMap';
 }));
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* @flow */
+
+
+/* :: import type {
+  AngularCallback, Coordinates, GoogleMapsMouseEvent
+} from '../../types.js' */
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var mod = __webpack_require__(0);
+var utils = __webpack_require__(1);
+var DEFAULT_ATTRS = __webpack_require__(3).DEFAULT_ATTRS;
+
+var JS_URL = 'https://maps.google.com/maps/api/js';
+
+var BmLocationOnMapController = function () {
+  /* :: static $inject: string[] */
+
+  // internal use
+
+  /* :: googleMapsUrl: string */
+  /* :: onDragEnd: (event: Object) => void */
+  /* :: style: Object */
+
+  // public attributes (after casts / checks)
+
+  /* :: coords: Coordinates */
+  /* :: height: number */
+  /* :: ngDisabled: boolean */
+  /* :: ngReadonly: boolean */
+  /* :: onChange: AngularCallback */
+  /* :: width: number */
+  /* :: zoom: number */
+
+  function BmLocationOnMapController($rootScope /* : Object */) {
+    _classCallCheck(this, BmLocationOnMapController);
+
+    Object.assign(this, {
+      googleMapsUrl: JS_URL + '?key=' + $rootScope.googleMapsApiKey
+    }, DEFAULT_ATTRS);
+
+    this.onDragEnd = this.onDragEnd.bind(this); // take back from ngMap marker
+  }
+
+  _createClass(BmLocationOnMapController, [{
+    key: '$onInit',
+    value: function $onInit() {}
+  }, {
+    key: '$onDestroy',
+    value: function $onDestroy() {}
+  }, {
+    key: '$onChanges',
+    value: function $onChanges() {
+      this.ngDisabled = utils.parseBooleanAttribute(this.ngDisabled);
+      this.ngReadonly = utils.parseBooleanAttribute(this.ngReadonly);
+
+      this.height = Number(this.height) || DEFAULT_ATTRS.height;
+      this.width = Number(this.width) || DEFAULT_ATTRS.width;
+      this.zoom = Number(this.zoom) || DEFAULT_ATTRS.zoom;
+
+      this.coords = utils.parseCoords(this.coords);
+
+      this.style = {
+        height: this.height,
+        width: this.width
+      };
+    }
+  }, {
+    key: 'center',
+    value: function center() {
+      if (utils.isCoordsValid(this.coords)) {
+        return [this.coords.latitude, this.coords.longitude];
+      }
+      return [0, 0];
+    }
+
+    // for an explanation of `this.onChange({ value: { /* ... */ } })`
+    // see: http://www.codelord.net/2016/05/13/understanding-angulars-and-binding/
+
+  }, {
+    key: 'onDragEnd',
+    value: function onDragEnd(event /* : GoogleMapsMouseEvent */) {
+      if (typeof this.onChange === 'function') {
+        this.onChange({
+          value: {
+            latitude: event.latLng.lat(),
+            longitude: event.latLng.lng()
+          }
+        });
+      }
+    }
+  }]);
+
+  return BmLocationOnMapController;
+}();
+
+// minification-safe dependency-injection
+
+
+BmLocationOnMapController.$inject = ['$rootScope'];
+
+mod.component('bmLocationOnMap', {
+  bindings: {
+    coords: '<?',
+    height: '@?',
+    ngDisabled: '@?',
+    ngReadonly: '@?',
+    onChange: '&?',
+    width: '@?',
+    zoom: '@?'
+  },
+  controller: BmLocationOnMapController,
+  template: '\n  <bm-static-location-on-map\n    ng-if="$ctrl.ngDisabled"\n    coords="$ctrl.coords"\n  ></bm-static-location-on-map>\n  <figure\n    class="bm-location__map-container"\n    ng-if="!$ctrl.ngDisabled"\n    map-lazy-load="https://maps.google.com/maps/api/js"\n    map-lazy-load-params="{{$ctrl.googleMapsUrl}}"\n  >\n    <ng-map\n      class="bm-location__map"\n      ng-style="{{$ctrl.style}}"\n      center="{{$ctrl.center()}}"\n      zoom="{{$ctrl.zoom}}"\n    >\n      <marker\n        animation="Animation.DROP"\n        draggable="{{!$ctrl.ngReadonly}}"\n        on-dragend="$ctrl.onDragEnd()"\n        position="{{$ctrl.center()}}"\n      ></marker>\n    </ng-map>\n  </figure>\n'
+});
+
+module.exports = {
+  BmLocationOnMapController: BmLocationOnMapController
+};
+
+/***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* @flow */
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var querystring = __webpack_require__(10);
+
+/* :: import type { Coordinates } from '../../types.js' */
+
+var mod = __webpack_require__(0);
+var utils = __webpack_require__(1);
+var DEFAULT_ATTRS = __webpack_require__(3).DEFAULT_ATTRS;
+
+var API_URL = 'https://maps.googleapis.com/maps/api/staticmap';
+
+var BmStaticLocationOnController = function () {
+  /* :: static $inject : string[] */
+
+  // internal use
+
+  /* :: googleMapsUrl: string */
+
+  // public attributes (after casts)
+
+  /* :: coords: Coordinates */
+  /* :: height: number */
+  /* :: width: number */
+  /* :: zoom: number */
+
+  function BmStaticLocationOnController($rootScope /* : Object */) {
+    _classCallCheck(this, BmStaticLocationOnController);
+
+    Object.assign(this, {
+      googleMapsUrl: API_URL + '?key=' + $rootScope.googleMapsApiKey
+    }, DEFAULT_ATTRS);
+  }
+
+  _createClass(BmStaticLocationOnController, [{
+    key: '$onInit',
+    value: function $onInit() {}
+  }, {
+    key: '$onDestroy',
+    value: function $onDestroy() {}
+  }, {
+    key: '$onChanges',
+    value: function $onChanges() {
+      this.height = this.height || DEFAULT_ATTRS.height;
+      this.width = this.width || DEFAULT_ATTRS.width;
+      this.zoom = Number(this.zoom) || DEFAULT_ATTRS.zoom;
+
+      this.coords = utils.parseCoords(this.coords);
+    }
+  }, {
+    key: 'isValid',
+    value: function isValid() {
+      return utils.isCoordsValid(this.coords);
+    }
+  }, {
+    key: 'imgSrc',
+    value: function imgSrc() {
+      var options = {
+        scale: 2, // retina
+        size: this.width + 'x' + this.height,
+        zoom: this.zoom
+      };
+
+      if (!this.isValid()) {
+        var _qsa = querystring.stringify(Object.assign({}, options, {
+          center: '0,0',
+          zoom: 0
+        }));
+        return this.googleMapsUrl + '&' + _qsa;
+      }
+
+      var qsa = querystring.stringify(Object.assign({}, options, {
+        center: this.coords.latitude + ',' + this.coords.longitude,
+        markers: 'color:red|' + this.coords.latitude + ',' + this.coords.longitude
+      }));
+      return this.googleMapsUrl + '&' + qsa;
+    }
+  }, {
+    key: 'title',
+    value: function title() {
+      if (!this.isValid()) {
+        return 'map of unspecified location';
+      }
+      return 'map with center at ' + this.coords.latitude + ' latitude, ' + this.coords.longitude + ' longitude';
+    }
+  }]);
+
+  return BmStaticLocationOnController;
+}();
+
+// minification-safe dependency-injection
+
+
+BmStaticLocationOnController.$inject = ['$rootScope'];
+
+mod.component('bmStaticLocationOnMap', {
+  bindings: {
+    coords: '<?',
+    height: '@?',
+    width: '@?',
+    zoom: '@?'
+  },
+  controller: BmStaticLocationOnController,
+  template: '\n  <figure class="bm-location__map-container">\n    <img class="bm-location__map" ng-src="{{$ctrl.imgSrc()}}" alt="{{$ctrl.title()}}" height="{{$ctrl.height}}" width="{{$ctrl.height}}" />\n  </figure>\n'
+});
+
+module.exports = {
+  BmStaticLocationOnController: BmStaticLocationOnController
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.decode = exports.parse = __webpack_require__(11);
+exports.encode = exports.stringify = __webpack_require__(12);
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4145,7 +4221,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4234,30 +4310,6 @@ var objectKeys = Object.keys || function (obj) {
   }
   return res;
 };
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.decode = exports.parse = __webpack_require__(9);
-exports.encode = exports.stringify = __webpack_require__(10);
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* @flow */
-
-
-__webpack_require__(4)
-__webpack_require__(5)
-__webpack_require__(6)
 
 
 /***/ })
