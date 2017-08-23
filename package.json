@@ -1,13 +1,13 @@
 {
   "name": "@blinkmobile/angular-location",
   "description": "Angular 1.x components for maps and geolocation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Ron Waldon <jokeyrhyme@gmail.com> (https://github.com/jokeyrhyme)",
   "bugs": {
     "url": "https://github.com/blinkmobile/angular-location.js/issues"
   },
   "dependencies": {
-    "@blinkmobile/geolocation": "^2.0.1",
+    "@blinkmobile/geolocation": "^2.0.3",
     "ngmap": "^1.17.8"
   },
   "devDependencies": {
