@@ -3,7 +3,7 @@
 exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
+    <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
   </div>
@@ -13,7 +13,7 @@ exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly] 1`] 
 exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
+    <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
   </div>
@@ -23,7 +23,7 @@ exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
 exports[`$rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
+    <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
   </div>
@@ -33,7 +33,7 @@ exports[`$rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
 exports[`$rootScope.googleMapsApiKey [ng-model] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
+    <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly --><div class=\\"bm-button-container bm-location__button-container ng-scope\\" ng-if=\\"!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly\\">
 
