@@ -138,7 +138,7 @@ module.exports = angular;
 var DEFAULT_ATTRS = {
   height: 300,
   width: 300,
-  zoom: 10
+  zoom: 15
 };
 
 module.exports = {
@@ -298,7 +298,7 @@ mod.component('bmConfirmLocationOnMap', {
   require: {
     ngModel: 'ngModel'
   },
-  template: '\n  <div class="bm-location">\n    <bm-location-on-map\n      coords="$ctrl.coords"\n      ng-disabled="{{!$ctrl.isEditing}}"\n      ng-readonly="{{$ctrl.ngReadonly}}"\n      on-change="$ctrl.onChange(value)"\n    ></bm-location-on-map>\n\n    <div\n      class="bm-button-container bm-location__button-container"\n      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"\n    >\n\n      <button type="button"\n        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onCancel()"\n      >Cancel</button>\n      <button type="button"\n        class="bm-button bm-button-findme bm-location__button bm-location__button-findme"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onFindMe()"\n      >Find Me</button>\n      <button type="button"\n        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onConfirm()"\n      >Confirm</button>\n\n      <button type="button"\n        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onClear()"\n      >Clear</button>\n      <button type="button"\n        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onEdit()"\n      >Edit\n      </button>\n\n    </div>\n  </div>\n'
+  template: '\n  <div class="bm-location">\n    <bm-location-on-map\n      coords="$ctrl.coords"\n      ng-disabled="{{!$ctrl.isEditing}}"\n      ng-readonly="{{$ctrl.ngReadonly}}"\n      on-change="$ctrl.onChange(value)"\n      ng-if="$ctrl.isEditing || $ctrl.coords"\n    ></bm-location-on-map>\n\n    <div\n      class="bm-button-container bm-location__button-container"\n      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"\n    >\n\n      <button type="button"\n        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onCancel()"\n      >Cancel</button>\n      <button type="button"\n        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onConfirm()"\n      >Confirm</button>\n\n      <button type="button"\n        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onClear()"\n      >Clear</button>\n      <button type="button"\n        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onEdit()"\n      >Locate\n      </button>\n\n    </div>\n  </div>\n'
 });
 
 module.exports = {
@@ -396,11 +396,11 @@ function detectDriver () /* : GeolocationDriver | false */ {
 function getCurrentPosition (
   options /* :? PositionOptionsLike */
 ) /* : Promise<PositionLike> */ {
-  var driver = detectDriver()
-  if (!driver) {
-    return Promise.reject(new Error('GeoLocation not supported'))
-  }
   return new Promise(function (resolve, reject) {
+    var driver = detectDriver()
+    if (!driver) {
+      return reject(new Error('GeoLocation not supported'))
+    }
     driver.getCurrentPosition(function (position) {
       resolve(position)
     }, function (err) {
@@ -410,11 +410,11 @@ function getCurrentPosition (
 }
 
 module.exports = {
-  DEFAULT_POSITION_OPTIONS,
+  DEFAULT_POSITION_OPTIONS: DEFAULT_POSITION_OPTIONS,
 
-  clonePosition,
-  getCurrentPosition,
-  mergePositionOptions
+  clonePosition: clonePosition,
+  getCurrentPosition: getCurrentPosition,
+  mergePositionOptions: mergePositionOptions
 }
 
 

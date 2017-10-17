@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.0.0 (2017-10-17)
+
 ### Changed
 
 -   FT-162: [Zoom Level](https://developers.google.com/maps/documentation/static-maps/intro#Zoomlevels) from 10 to 15
