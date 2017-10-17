@@ -3,14 +3,7 @@
 exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <bm-location-on-map coords=\\"$ctrl.coords\\" ng-disabled=\\"true\\" ng-readonly=\\"true\\" on-change=\\"$ctrl.onChange(value)\\" class=\\"ng-isolate-scope\\" readonly=\\"readonly\\" disabled=\\"disabled\\">
-  <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\\"$ctrl.ngDisabled\\" coords=\\"$ctrl.coords\\" class=\\"ng-scope ng-isolate-scope\\">
-  <figure class=\\"bm-location__map-container\\">
-    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\" alt=\\"map of unspecified location\\" height=\\"300\\" width=\\"300\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\">
-  </figure>
-</bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled -->
-</bm-location-on-map>
+    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
   </div>
@@ -20,14 +13,7 @@ exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly] 1`] 
 exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <bm-location-on-map coords=\\"$ctrl.coords\\" ng-disabled=\\"true\\" ng-readonly=\\"false\\" on-change=\\"$ctrl.onChange(value)\\" class=\\"ng-isolate-scope\\" disabled=\\"disabled\\">
-  <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\\"$ctrl.ngDisabled\\" coords=\\"$ctrl.coords\\" class=\\"ng-scope ng-isolate-scope\\">
-  <figure class=\\"bm-location__map-container\\">
-    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\" alt=\\"map of unspecified location\\" height=\\"300\\" width=\\"300\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\">
-  </figure>
-</bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled -->
-</bm-location-on-map>
+    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
   </div>
@@ -37,14 +23,7 @@ exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
 exports[`$rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <bm-location-on-map coords=\\"$ctrl.coords\\" ng-disabled=\\"true\\" ng-readonly=\\"true\\" on-change=\\"$ctrl.onChange(value)\\" class=\\"ng-isolate-scope\\" readonly=\\"readonly\\" disabled=\\"disabled\\">
-  <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\\"$ctrl.ngDisabled\\" coords=\\"$ctrl.coords\\" class=\\"ng-scope ng-isolate-scope\\">
-  <figure class=\\"bm-location__map-container\\">
-    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\" alt=\\"map of unspecified location\\" height=\\"300\\" width=\\"300\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\">
-  </figure>
-</bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled -->
-</bm-location-on-map>
+    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
   </div>
@@ -54,23 +33,15 @@ exports[`$rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
 exports[`$rootScope.googleMapsApiKey [ng-model] 1`] = `
 "
   <div class=\\"bm-location\\">
-    <bm-location-on-map coords=\\"$ctrl.coords\\" ng-disabled=\\"true\\" ng-readonly=\\"false\\" on-change=\\"$ctrl.onChange(value)\\" class=\\"ng-isolate-scope\\" disabled=\\"disabled\\">
-  <!-- ngIf: $ctrl.ngDisabled --><bm-static-location-on-map ng-if=\\"$ctrl.ngDisabled\\" coords=\\"$ctrl.coords\\" class=\\"ng-scope ng-isolate-scope\\">
-  <figure class=\\"bm-location__map-container\\">
-    <img class=\\"bm-location__map\\" ng-src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\" alt=\\"map of unspecified location\\" height=\\"300\\" width=\\"300\\" src=\\"https://maps.googleapis.com/maps/api/staticmap?key=secret&amp;scale=2&amp;size=300x300&amp;zoom=0&amp;center=0%2C0\\">
-  </figure>
-</bm-static-location-on-map><!-- end ngIf: $ctrl.ngDisabled -->
-  <!-- ngIf: !$ctrl.ngDisabled -->
-</bm-location-on-map>
+    <!-- ngIf: $ctrl.isEditing || $ctrl.coords -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly --><div class=\\"bm-button-container bm-location__button-container ng-scope\\" ng-if=\\"!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly\\">
 
       <!-- ngIf: $ctrl.isEditing -->
       <!-- ngIf: $ctrl.isEditing -->
-      <!-- ngIf: $ctrl.isEditing -->
 
       <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-clear bm-location__button bm-location__button-clear ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onClear()\\">Clear</button><!-- end ngIf: !$ctrl.isEditing -->
-      <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-edit bm-location__button bm-location__button-edit ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onEdit()\\">Edit
+      <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-edit bm-location__button bm-location__button-edit ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onEdit()\\">Locate
       </button><!-- end ngIf: !$ctrl.isEditing -->
 
     </div><!-- end ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
