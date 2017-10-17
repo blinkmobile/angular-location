@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.0.1 (2017-10-17)
+
 ### Fixed
 
 -   FT-162: Check to see if coords are valid before hiding map

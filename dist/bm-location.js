@@ -246,6 +246,11 @@ var BmConfirmLocationOnMapController = function () {
       this.ngModel.$setViewValue(this.coords, event);
     }
   }, {
+    key: 'isCoordsValid',
+    value: function isCoordsValid() {
+      return utils.isCoordsValid(this.coords);
+    }
+  }, {
     key: 'onFindMe',
     value: function onFindMe() {
       var _this2 = this;
@@ -275,7 +280,7 @@ var BmConfirmLocationOnMapController = function () {
     key: 'onEdit',
     value: function onEdit() {
       this.isEditing = true;
-      if (!this.coords) {
+      if (!this.isCoordsValid()) {
         this.onFindMe();
       }
     }
@@ -298,7 +303,7 @@ mod.component('bmConfirmLocationOnMap', {
   require: {
     ngModel: 'ngModel'
   },
-  template: '\n  <div class="bm-location">\n    <bm-location-on-map\n      coords="$ctrl.coords"\n      ng-disabled="{{!$ctrl.isEditing}}"\n      ng-readonly="{{$ctrl.ngReadonly}}"\n      on-change="$ctrl.onChange(value)"\n      ng-if="$ctrl.isEditing || $ctrl.coords"\n    ></bm-location-on-map>\n\n    <div\n      class="bm-button-container bm-location__button-container"\n      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"\n    >\n\n      <button type="button"\n        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onCancel()"\n      >Cancel</button>\n      <button type="button"\n        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onConfirm()"\n      >Confirm</button>\n\n      <button type="button"\n        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onClear()"\n      >Clear</button>\n      <button type="button"\n        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onEdit()"\n      >Locate\n      </button>\n\n    </div>\n  </div>\n'
+  template: '\n  <div class="bm-location">\n    <bm-location-on-map\n      coords="$ctrl.coords"\n      ng-disabled="{{!$ctrl.isEditing}}"\n      ng-readonly="{{$ctrl.ngReadonly}}"\n      on-change="$ctrl.onChange(value)"\n      ng-if="$ctrl.isEditing || $ctrl.isCoordsValid()"\n    ></bm-location-on-map>\n\n    <div\n      class="bm-button-container bm-location__button-container"\n      ng-if="!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly"\n    >\n\n      <button type="button"\n        class="bm-button bm-button-cancel bm-location__button bm-location__button-cancel"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onCancel()"\n      >Cancel</button>\n      <button type="button"\n        class="bm-button bm-button-confirm bm-location__button bm-location__button-confirm"\n        ng-if="$ctrl.isEditing"\n        ng-click="$ctrl.onConfirm()"\n      >Confirm</button>\n\n      <button type="button"\n        class="bm-button bm-button-clear bm-location__button bm-location__button-clear"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onClear()"\n      >Clear</button>\n      <button type="button"\n        class="bm-button bm-button-edit bm-location__button bm-location__button-edit"\n        ng-if="!$ctrl.isEditing"\n        ng-click="$ctrl.onEdit()"\n      >Locate\n      </button>\n\n    </div>\n  </div>\n'
 });
 
 module.exports = {
