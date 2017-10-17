@@ -1,7 +1,16 @@
-<a name="1.0.4"></a>
-### 1.0.4 (2017-08-23)
+# Changelog
 
+## Unreleased
 
-<a name="1.0.3"></a>
-### 1.0.3 (2017-08-23)
+### Changed
+
+-   FT-162: [Zoom Level](https://developers.google.com/maps/documentation/static-maps/intro#Zoomlevels) from 10 to 15
+
+### Removed
+
+-   FT-162: "Find Me" button
+
+## 1.0.4 (2017-08-23)
+
+## 1.0.3 (2017-08-23)
 
