@@ -1,41 +1,40 @@
 # CSS Selectors
 
+*Note* `bm-*` style css selectors are deprecated and will be removed in a future version.
 
 ## Components
 
 
 ### bmStaticLocationOnMap
 
--   `.bm-location__map-container`
+-   `.ob-location__map-container`
 
--   `.bm-location__map`
+-   `.ob-location__map`
 
 
 ### bmLocationOnMap
 
--   `.bm-location__map-container`
+-   `.ob-location__map-container`
 
--   `.bm-location__map`
+-   `.ob-location__map`
 
 
 ### bmConfirmLocationOnMap
 
--   `.bm-location`
+-   `.ob-location`
 
--   `.bm-location__map-container`
+-   `.ob-location__map-container`
 
--   `.bm-location__map`
+-   `.ob-location__map`
 
--   `.bm-location__button-container` with `.bm-button-container`
+-   `.ob-location__button-container` with `.ob-button-container`
 
--   `.bm-location__button` with `.bm-button`
+-   `.ob-location__button` with `.ob-button`
 
--   `.bm-location__button-cancel` with `.bm-button` and `.bm-button-cancel`
+-   `.ob-location__button-cancel` with `.ob-button` and `.ob-button__cancel`
 
--   `.bm-location__button-findme` with `.bm-button` and `.bm-button-findme`
+-   `.ob-location__button-confirm` with `.ob-button` and `.ob-button__confirm`
 
--   `.bm-location__button-confirm` with `.bm-button` and `.bm-button-confirm`
+-   `.ob-location__button-clear` with `.ob-button` and `.ob-button__clear`
 
--   `.bm-location__button-clear` with `.bm-button` and `.bm-button-clear`
-
--   `.bm-location__button-edit` with `.bm-button` and `.bm-button-edit`
+-   `.ob-location__button-edit` with `.ob-button` and `.ob-button__edit`

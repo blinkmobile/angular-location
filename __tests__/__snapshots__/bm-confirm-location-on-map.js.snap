@@ -2,7 +2,7 @@
 
 exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly] 1`] = `
 "
-  <div class=\\"bm-location\\">
+  <div class=\\"bm-location ob-location\\">
     <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
@@ -12,7 +12,7 @@ exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] [ng-readonly] 1`] 
 
 exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
 "
-  <div class=\\"bm-location\\">
+  <div class=\\"bm-location ob-location\\">
     <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
@@ -22,7 +22,7 @@ exports[`$rootScope.googleMapsApiKey [ng-disabled] [ng-model] 1`] = `
 
 exports[`$rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
 "
-  <div class=\\"bm-location\\">
+  <div class=\\"bm-location ob-location\\">
     <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
     <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
@@ -32,16 +32,16 @@ exports[`$rootScope.googleMapsApiKey [ng-model] [ng-readonly] 1`] = `
 
 exports[`$rootScope.googleMapsApiKey [ng-model] 1`] = `
 "
-  <div class=\\"bm-location\\">
+  <div class=\\"bm-location ob-location\\">
     <!-- ngIf: $ctrl.isEditing || $ctrl.isCoordsValid() -->
 
-    <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly --><div class=\\"bm-button-container bm-location__button-container ng-scope\\" ng-if=\\"!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly\\">
+    <!-- ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly --><div class=\\"bm-button-container bm-location__button-container ob-button-container ob-location__button-container ng-scope\\" ng-if=\\"!$ctrl.ngDisabled &amp;&amp; !$ctrl.ngReadonly\\">
 
       <!-- ngIf: $ctrl.isEditing -->
       <!-- ngIf: $ctrl.isEditing -->
 
-      <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-clear bm-location__button bm-location__button-clear ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onClear()\\">Clear</button><!-- end ngIf: !$ctrl.isEditing -->
-      <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-edit bm-location__button bm-location__button-edit ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onEdit()\\">Locate
+      <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-clear bm-location__button bm-location__button-clear ob-button ob-button__clear ob-button-clear ob-location__button ob-location__button-clear ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onClear()\\">Clear</button><!-- end ngIf: !$ctrl.isEditing -->
+      <!-- ngIf: !$ctrl.isEditing --><button type=\\"button\\" class=\\"bm-button bm-button-edit bm-location__button bm-location__button-edit ob-button ob-button__edit ob-location__button ob-location__button-edit ng-scope\\" ng-if=\\"!$ctrl.isEditing\\" ng-click=\\"$ctrl.onEdit()\\">Locate
       </button><!-- end ngIf: !$ctrl.isEditing -->
 
     </div><!-- end ngIf: !$ctrl.ngDisabled && !$ctrl.ngReadonly -->
