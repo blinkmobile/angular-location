@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 2.1.1 (2017-08-14)
+
+### Fixed
+
+-   `2.1.0` not including new build files
+
 ## 2.1.0 (2017-08-14)
 
 ### Added
