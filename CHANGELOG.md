@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.1.0 (2017-08-14)
+
 ### Added
 
 -   ON-1555: Add `ob-*` classes
